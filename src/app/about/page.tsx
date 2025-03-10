@@ -1,5 +1,3 @@
-import { supabase } from '@/lib/supabase';
-import type { WebsiteContent } from '@/lib/supabase';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,33 +5,14 @@ export const metadata: Metadata = {
   description: 'Learn more about my background, skills, and experiences.',
 };
 
-async function getAboutContent() {
-  const { data, error } = await supabase
-    .from('website_content')
-    .select('*')
-    .eq('id', 1)
-    .single();
-
-  if (error) {
-    console.error('Error fetching about content:', error);
-    return { paragraphs: [] };
-  }
-
-  return (data as WebsiteContent).content.aboutMe;
-}
-
-export default async function AboutPage() {
-  const aboutContent = await getAboutContent();
-
+export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-bold mb-8 text-center">About Me</h1>
       <div className="prose dark:prose-invert lg:prose-lg mx-auto">
-        {aboutContent.paragraphs.map((paragraph, index) => (
-          <p key={index} className="mb-6 text-gray-600 dark:text-gray-400">
-            {paragraph}
-          </p>
-        ))}
+        <p className="mb-6 text-gray-600 dark:text-gray-400">
+          Hi, I'm Ishaan Dhiman, a passionate Full Stack Developer with a love for creating modern web applications. I specialize in React, Next.js, and modern web technologies.
+        </p>
       </div>
 
       <div className="mt-16">
