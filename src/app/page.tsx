@@ -1,5 +1,11 @@
+import { Metadata } from 'next';
 import Link from "next/link";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: 'Ishaan Dhiman - Student Developer',
+  description: 'Welcome to my portfolio. I am a passionate student developer focusing on web development and AI.',
+};
 
 export default function Home() {
   return (
@@ -10,14 +16,14 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
           <div className="absolute inset-0">
             <div className="absolute -left-4 -top-4 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div className="absolute -right-4 -top-4 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+            <div className="absolute -right-4 -top-4 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob delay-2000"></div>
+            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob delay-4000"></div>
           </div>
         </div>
 
         {/* Content */}
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text animate-gradient">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-[length:200%_auto] text-transparent bg-clip-text animate-gradient">
             Ishaan Dhiman
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">
@@ -26,13 +32,13 @@ export default function Home() {
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center animate-fade-in-up">
             <Link
               href="/projects"
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all shadow-lg hover:shadow-xl w-48"
+              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl w-48"
             >
               View Projects
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 transform hover:scale-105 transition-all w-48"
+              className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 transform hover:scale-105 transition-all duration-300 w-48"
             >
               Contact Me
             </Link>
@@ -83,7 +89,7 @@ export default function Home() {
               <Link
                 href={item.link}
                 key={index}
-                className="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all transform hover:scale-105"
+                className="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:bg-white dark:hover:bg-gray-700"
               >
                 <div className="text-4xl mb-4">{item.icon}</div>
                 <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
@@ -116,10 +122,12 @@ export default function Home() {
             ].map((project, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
               >
                 <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                  <span className="text-4xl">{project.isGitHub ? '📚' : '🚀'}</span>
+                  <span className="text-4xl transform transition-transform duration-300 hover:scale-125">
+                    {project.isGitHub ? '📚' : '🚀'}
+                  </span>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
@@ -130,7 +138,7 @@ export default function Home() {
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors duration-300"
                       >
                         {tech}
                       </span>
@@ -143,7 +151,7 @@ export default function Home() {
           <div className="text-center mt-8">
             <Link
               href="/projects"
-              className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
             >
               View All Projects
             </Link>
@@ -160,7 +168,7 @@ export default function Home() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transform hover:scale-105 transition-all"
+            className="inline-block px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300"
           >
             Get in Touch
           </Link>
