@@ -1,53 +1,59 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
-import type { WebsiteContent } from '@/lib/supabase';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Projects - Your Name',
-  description: 'Explore my portfolio of projects and technical achievements.',
+  title: 'Projects - Ishaan Dhiman',
+  description: 'Explore my portfolio of projects in web development, AI, and more.',
 };
 
-async function getProjects() {
-  const { data, error } = await supabase
-    .from('website_content')
-    .select('*')
-    .eq('id', 1)
-    .single();
-
-  if (error) {
-    console.error('Error fetching projects:', error);
-    return [];
-  }
-
-  return (data as WebsiteContent).content.projects;
-}
-
-export default async function ProjectsPage() {
-  const projects = await getProjects();
+export default function ProjectsPage() {
+  const projects = [
+    {
+      title: 'Personal Portfolio Website',
+      description: 'A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, dynamic content loading, and smooth animations.',
+      technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+      image: '/projects/portfolio.png',
+      liveUrl: 'https://ishaan-portfolio.vercel.app',
+      githubUrl: 'https://github.com/yourusername/portfolio',
+    },
+    {
+      title: 'AI Chat Application',
+      description: 'An intelligent chatbot application that leverages machine learning for natural conversations. Built with Python and React.',
+      technologies: ['Python', 'React', 'Machine Learning', 'FastAPI'],
+      image: '/projects/ai-chat.png',
+      liveUrl: '#',
+      githubUrl: '#',
+    },
+    {
+      title: 'E-commerce Platform',
+      description: 'A full-featured e-commerce platform with user authentication, product management, and payment integration.',
+      technologies: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
+      image: '/projects/ecommerce.png',
+      liveUrl: '#',
+      githubUrl: '#',
+    },
+  ];
 
   return (
     <div className="max-w-6xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-bold mb-8 text-center">My Projects</h1>
+      <p className="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+        Here are some of the projects I've worked on. Each project represents a unique challenge and learning experience.
+      </p>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <div
             key={index}
             className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
           >
-            {project.image && (
-              <div className="relative h-48">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
+            <div className="relative h-48">
+              <div className="absolute inset-0 bg-blue-600 opacity-10"></div>
+              <div className="absolute inset-0 flex items-center justify-center text-4xl text-blue-600">
+                🚀
               </div>
-            )}
+            </div>
             <div className="p-6">
-              <h2 className="text-2xl font-semibold mb-3">{project.title}</h2>
+              <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 {project.description}
               </p>
@@ -61,16 +67,24 @@ export default async function ProjectsPage() {
                   </span>
                 ))}
               </div>
-              {project.link && (
-                <Link
-                  href={project.link}
+              <div className="flex gap-4">
+                <a
+                  href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="text-blue-600 hover:text-blue-700 transition-colors"
                 >
-                  View Project
-                </Link>
-              )}
+                  Live Demo →
+                </a>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                >
+                  GitHub →
+                </a>
+              </div>
             </div>
           </div>
         ))}

@@ -1,119 +1,97 @@
-import { supabase } from '@/lib/supabase';
-import type { WebsiteContent } from '@/lib/supabase';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Achievements - Your Name',
-  description: 'My academic and extracurricular achievements and accomplishments.',
+  title: 'Achievements - Ishaan Dhiman',
+  description: 'Explore my professional achievements, certifications, and milestones.',
 };
 
-async function getAchievements() {
-  const { data, error } = await supabase
-    .from('website_content')
-    .select('*')
-    .eq('id', 1)
-    .single();
-
-  if (error) {
-    console.error('Error fetching achievements:', error);
-    return {
-      academicAchievements: [],
-      extracurricularActivities: [],
-    };
-  }
-
-  return {
-    academicAchievements: (data as WebsiteContent).content.academicAchievements,
-    extracurricularActivities: (data as WebsiteContent).content.extracurricularActivities,
-  };
-}
-
-export default async function AchievementsPage() {
-  const { academicAchievements, extracurricularActivities } = await getAchievements();
+export default function AchievementsPage() {
+  const achievements = [
+    {
+      category: 'Certifications',
+      items: [
+        {
+          title: 'AWS Certified Developer',
+          organization: 'Amazon Web Services',
+          date: '2024',
+          description: 'Certification demonstrating expertise in developing and maintaining applications on AWS.',
+        },
+        {
+          title: 'Machine Learning Specialization',
+          organization: 'Coursera',
+          date: '2023',
+          description: 'Comprehensive certification covering machine learning algorithms and applications.',
+        },
+      ],
+    },
+    {
+      category: 'Projects & Recognition',
+      items: [
+        {
+          title: 'Hackathon Winner',
+          organization: 'Tech Innovation Summit',
+          date: '2023',
+          description: 'First place in the AI/ML category for developing an innovative solution.',
+        },
+        {
+          title: 'Open Source Contributor',
+          organization: 'Various Projects',
+          date: '2022-Present',
+          description: 'Active contributor to several open-source projects, focusing on web development tools.',
+        },
+      ],
+    },
+    {
+      category: 'Academic Excellence',
+      items: [
+        {
+          title: "Dean's List",
+          organization: 'University',
+          date: '2022-2023',
+          description: 'Recognized for outstanding academic performance.',
+        },
+      ],
+    },
+  ];
 
   return (
     <div className="max-w-4xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold mb-12 text-center">Achievements</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center">Achievements</h1>
+      <p className="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+        A collection of my professional accomplishments, certifications, and recognition.
+      </p>
 
       <div className="space-y-16">
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center">Academic Achievements</h2>
-          <div className="space-y-6">
-            {academicAchievements.map((achievement, index) => (
-              <div
-                key={index}
-                className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow"
-              >
-                <h3 className="text-xl font-semibold mb-2">{achievement.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-2">
-                  {achievement.description}
-                </p>
-                <p className="text-sm text-gray-500">{achievement.date}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Extracurricular Activities
-          </h2>
-          <div className="space-y-6">
-            {extracurricularActivities.map((activity, index) => (
-              <div
-                key={index}
-                className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow"
-              >
-                <h3 className="text-xl font-semibold mb-2">{activity.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400 mb-4">
-                  Role: {activity.role}
-                </p>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {activity.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center">Certifications</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                name: 'AWS Certified Developer',
-                issuer: 'Amazon Web Services',
-                date: '2023',
-                link: '#',
-              },
-              {
-                name: 'Professional Scrum Master I',
-                issuer: 'Scrum.org',
-                date: '2023',
-                link: '#',
-              },
-            ].map((cert, index) => (
-              <div
-                key={index}
-                className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition-shadow"
-              >
-                <h3 className="text-xl font-semibold mb-2">{cert.name}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-2">
-                  {cert.issuer}
-                </p>
-                <p className="text-sm text-gray-500 mb-4">{cert.date}</p>
-                <a
-                  href={cert.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+        {achievements.map((category, index) => (
+          <div key={index}>
+            <h2 className="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">
+              {category.category}
+            </h2>
+            <div className="space-y-6">
+              {category.items.map((item, itemIndex) => (
+                <div
+                  key={itemIndex}
+                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
                 >
-                  View Certificate →
-                </a>
-              </div>
-            ))}
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        {item.organization}
+                      </p>
+                    </div>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {item.date}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </section>
+        ))}
       </div>
     </div>
   );
