@@ -55,43 +55,49 @@ export default function AchievementsPage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">Achievements</h1>
-      <p className="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-        A collection of my professional accomplishments, certifications, and recognition.
-      </p>
+    <div className="min-h-screen py-12 px-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+            Achievements
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            A collection of my professional accomplishments, certifications, and recognition.
+          </p>
+        </div>
 
-      <div className="space-y-16">
-        {achievements.map((category, index) => (
-          <div key={index}>
-            <h2 className="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">
-              {category.category}
-            </h2>
-            <div className="space-y-6">
-              {category.items.map((item, itemIndex) => (
-                <div
-                  key={itemIndex}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        {item.organization}
-                      </p>
+        <div className="space-y-16">
+          {achievements.map((category, index) => (
+            <div key={index}>
+              <h2 className="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">
+                {category.category}
+              </h2>
+              <div className="space-y-6">
+                {category.items.map((item, itemIndex) => (
+                  <div
+                    key={itemIndex}
+                    className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                          {item.organization}
+                        </p>
+                      </div>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {item.date}
+                      </span>
                     </div>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {item.date}
-                    </span>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {item.description}
+                    </p>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

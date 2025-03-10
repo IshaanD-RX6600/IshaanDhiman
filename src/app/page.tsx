@@ -21,7 +21,7 @@ export default function Home() {
             Ishaan Dhiman
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">
-            Full Stack Developer & AI Enthusiast
+            Aspiring Developer & Passionate Learner
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center animate-fade-in-up">
             <Link
@@ -55,70 +55,71 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Quick Overview */}
       <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">My Skills</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <h2 className="text-3xl font-bold text-center mb-12">At a Glance</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "Frontend", icon: "🎨", skills: ["React", "Next.js", "Tailwind CSS"] },
-              { name: "Backend", icon: "⚙️", skills: ["Node.js", "Python", "MongoDB"] },
-              { name: "AI/ML", icon: "🤖", skills: ["TensorFlow", "PyTorch", "NLP"] },
-              { name: "Tools", icon: "🛠️", skills: ["Git", "Docker", "AWS"] },
-            ].map((category, index) => (
-              <div
+              {
+                title: "Academic Excellence",
+                icon: "🎓",
+                description: "CCC Score: 58/75 | Pascal Contest: 104/150",
+                link: "/academics"
+              },
+              {
+                title: "Coding Projects",
+                icon: "💻",
+                description: "Building innovative solutions with modern technologies",
+                link: "/projects"
+              },
+              {
+                title: "Extracurricular",
+                icon: "🌟",
+                description: "Active participation in tech clubs and coding competitions",
+                link: "/activities"
+              }
+            ].map((item, index) => (
+              <Link
+                href={item.link}
                 key={index}
-                className="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-shadow"
+                className="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all transform hover:scale-105"
               >
-                <div className="text-4xl mb-4">{category.icon}</div>
-                <h3 className="text-xl font-semibold mb-3">{category.name}</h3>
-                <ul className="space-y-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <li
-                      key={skillIndex}
-                      className="text-gray-600 dark:text-gray-400"
-                    >
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {item.description}
+                </p>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
+      {/* Latest Projects */}
       <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                title: "AI Chat Application",
-                description: "A real-time chat application powered by AI",
-                tech: ["Python", "React", "TensorFlow"],
-                image: "/projects/ai-chat.png",
-              },
-              {
-                title: "Portfolio Website",
-                description: "Modern portfolio with Next.js and Tailwind",
+                title: "Student Showcase Website",
+                description: "A modern portfolio built with Next.js and Tailwind CSS",
                 tech: ["Next.js", "Tailwind CSS", "TypeScript"],
-                image: "/projects/portfolio.png",
               },
               {
-                title: "E-commerce Platform",
-                description: "Full-featured online shopping platform",
-                tech: ["Node.js", "MongoDB", "React"],
-                image: "/projects/ecommerce.png",
-              },
+                title: "GitHub Projects",
+                description: "Check out my other projects and contributions",
+                tech: ["Various Technologies"],
+                isGitHub: true
+              }
             ].map((project, index) => (
               <div
                 key={index}
                 className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                  <span className="text-4xl">🚀</span>
+                  <span className="text-4xl">{project.isGitHub ? '📚' : '🚀'}</span>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
@@ -139,15 +140,23 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <div className="text-center mt-8">
+            <Link
+              href="/projects"
+              className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              View All Projects
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Let's Work Together</h2>
+          <h2 className="text-3xl font-bold mb-8">Let's Connect!</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            I'm always interested in hearing about new projects and opportunities.
+            Interested in collaborating or want to learn more about my work?
           </p>
           <Link
             href="/contact"

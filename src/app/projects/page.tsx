@@ -3,53 +3,59 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Projects - Ishaan Dhiman',
-  description: 'Explore my portfolio of web development and AI projects',
+  description: 'Explore my coding projects and GitHub repositories.',
 };
 
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  features: string[];
+  github: string;
+  demo?: string;
+  image?: string;
+}
+
 export default function ProjectsPage() {
-  const projects = [
+  const projects: Project[] = [
     {
-      title: 'AI Chat Application',
-      description: 'An intelligent chatbot application powered by machine learning, capable of natural conversations and task assistance.',
-      image: '/projects/ai-chat.png',
-      tech: ['Python', 'TensorFlow', 'React', 'Node.js'],
+      title: 'Student Showcase Website',
+      description: 'A modern portfolio website built with Next.js and Tailwind CSS, featuring responsive design and dynamic content management.',
+      tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase'],
       features: [
-        'Natural language processing',
-        'Real-time responses',
-        'Context awareness',
-        'Multi-language support',
+        'Responsive design with dark mode',
+        'Dynamic content management',
+        'SEO optimization',
+        'Contact form integration'
       ],
-      github: 'https://github.com/yourusername/ai-chat',
-      demo: 'https://ai-chat-demo.vercel.app',
+      github: 'https://github.com/yourusername/student-showcase',
+      demo: 'https://student-showcase.vercel.app'
     },
     {
-      title: 'Portfolio Website',
-      description: 'A modern, responsive portfolio website built with Next.js and Tailwind CSS, featuring dark mode and smooth animations.',
-      image: '/projects/portfolio.png',
-      tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      title: 'Python Utility Scripts',
+      description: 'A collection of Python scripts for automating various tasks and solving programming challenges.',
+      tech: ['Python', 'Pandas', 'NumPy'],
       features: [
-        'Responsive design',
-        'Dark/Light mode',
-        'Smooth animations',
-        'SEO optimized',
+        'Data processing utilities',
+        'File management tools',
+        'Algorithm implementations',
+        'Command-line interfaces'
       ],
-      github: 'https://github.com/yourusername/portfolio',
-      demo: 'https://ishaan-portfolio.vercel.app',
+      github: 'https://github.com/yourusername/python-utils'
     },
     {
-      title: 'E-commerce Platform',
-      description: 'A full-featured e-commerce platform with user authentication, product management, and payment integration.',
-      image: '/projects/ecommerce.png',
-      tech: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
+      title: 'Weather Dashboard',
+      description: 'A web application that displays weather information using public APIs and modern web technologies.',
+      tech: ['React', 'JavaScript', 'CSS', 'Weather API'],
       features: [
-        'User authentication',
-        'Shopping cart',
-        'Payment processing',
-        'Order management',
+        'Real-time weather data',
+        'Location-based forecasts',
+        'Interactive charts',
+        'Responsive design'
       ],
-      github: 'https://github.com/yourusername/ecommerce',
-      demo: 'https://ecommerce-demo.vercel.app',
-    },
+      github: 'https://github.com/yourusername/weather-dashboard',
+      demo: 'https://weather-dashboard-demo.vercel.app'
+    }
   ];
 
   return (
@@ -60,8 +66,35 @@ export default function ProjectsPage() {
           My Projects
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          A collection of my work in web development, AI, and more. Each project represents unique challenges and learning experiences.
+          A collection of my coding projects, from web applications to utility scripts.
+          Each project represents unique challenges and learning experiences.
         </p>
+      </div>
+
+      {/* GitHub Stats */}
+      <div className="max-w-4xl mx-auto mb-16">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+          <h2 className="text-2xl font-bold mb-6">GitHub Activity</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { label: 'Repositories', value: '10+' },
+              { label: 'Contributions', value: '200+' },
+              { label: 'Languages', value: '5' }
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
+              >
+                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                  {stat.value}
+                </div>
+                <div className="text-gray-600 dark:text-gray-400">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Projects Grid */}
@@ -109,21 +142,23 @@ export default function ProjectsPage() {
 
                   <div className="flex gap-4">
                     <a
-                      href={project.demo}
+                      href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                     >
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-2 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
-                    >
                       View Code
                     </a>
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-2 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+                      >
+                        Live Demo
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -135,9 +170,10 @@ export default function ProjectsPage() {
       {/* Call to Action */}
       <div className="max-w-4xl mx-auto mt-16 text-center">
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-8">
-          <h2 className="text-2xl font-bold mb-4">Let's Build Something Together</h2>
+          <h2 className="text-2xl font-bold mb-4">Interested in Collaborating?</h2>
           <p className="mb-6">
-            Interested in collaborating or have a project in mind? Let's connect!
+            I'm always looking to learn and work on interesting projects.
+            Let's build something amazing together!
           </p>
           <Link
             href="/contact"
