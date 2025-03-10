@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode, useState, useEffect } from 'react';
 import { ThemeContext, Theme, themeColors } from '@/lib/theme';
 import Navigation from './Navigation';
