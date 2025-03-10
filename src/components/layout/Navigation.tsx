@@ -1,12 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { useTheme } from '@/lib/theme';
+import { useTheme } from 'next-themes';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Navigation() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  // Avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isActive = (path: string) => pathname === path;
 
@@ -16,6 +23,10 @@ export default function Navigation() {
     { href: '/achievements', label: 'Achievements' },
     { href: '/contact', label: 'Contact' },
   ];
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <nav className="sticky top-0 z-50 backdrop-blur-lg bg-white/75 dark:bg-gray-900/75 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
@@ -43,11 +54,11 @@ export default function Navigation() {
               </Link>
             ))}
             <button
-              onClick={toggleTheme}
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? '🌙' : '☀️'}
+              {theme === 'dark' ? '☀️' : '🌙'}
             </button>
           </div>
         </div>

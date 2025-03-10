@@ -1,10 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { useTheme } from '@/lib/theme';
-
 export default function Footer() {
-  const { theme } = useTheme();
   const currentYear = new Date().getFullYear();
   
   const socialLinks = [

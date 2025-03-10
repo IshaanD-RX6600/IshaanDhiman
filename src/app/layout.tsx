@@ -1,13 +1,20 @@
-import type { Metadata } from "next";
+'use client';
+
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Layout from "@/components/layout/Layout";
+import { ThemeProvider } from "@/components/theme-provider";
+import Navigation from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Your Name - Personal Portfolio",
-  description: "Welcome to my personal portfolio website showcasing my projects, achievements, and blog.",
+export const metadata = {
+  title: {
+    default: 'Ishaan Dhiman - Portfolio',
+    template: '%s | Ishaan Dhiman'
+  },
+  description: 'Full Stack Developer & AI Enthusiast',
+  keywords: ['Next.js', 'React', 'JavaScript', 'Web Development', 'Full Stack', 'AI'],
 };
 
 export default function RootLayout({
@@ -16,9 +23,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Layout>{children}</Layout>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} min-h-screen`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex flex-col min-h-screen">
+            <Navigation />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
