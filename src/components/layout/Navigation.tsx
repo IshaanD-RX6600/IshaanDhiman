@@ -23,6 +23,7 @@ export default function Navigation() {
     { href: '/academics', label: 'Academics' },
     { href: '/projects', label: 'Projects' },
     { href: '/activities', label: 'Activities' },
+    { href: '/volunteering', label: 'Volunteering' },
     { href: '/photography', label: 'Photography' },
     { href: '/contact', label: 'Contact' },
   ];
