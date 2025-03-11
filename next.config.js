@@ -8,6 +8,8 @@ const nextConfig = {
       },
     ],
   },
+  output: 'standalone',
+  trailingSlash: true,
   reactStrictMode: true,
   swcMinify: true,
 };
