@@ -6,17 +6,17 @@ export default function Footer() {
   const socialLinks = [
     {
       name: 'GitHub',
-      url: 'https://github.com/yourusername',
+      url: 'https://github.com/IshaanD-RX6600',
       icon: '📂',
     },
     {
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/yourusername',
+      url: 'https://www.linkedin.com/in/ishaan-undefined-835a872a4/',
       icon: '💼',
     },
     {
       name: 'Email',
-      url: 'mailto:ishaandhiman74@gmail.com',
+      url: 'https://mail.google.com/mail/u/0/?hl=en/#spam?compose=GTvVlcSHwsPZFBStQVpRVhBnQxDXNtVKRjVpqDPknKNVrGxgjDHSHGWrmJHSnfDhkfzKRqtvfRDnL',
       icon: '📧',
     },
   ];
