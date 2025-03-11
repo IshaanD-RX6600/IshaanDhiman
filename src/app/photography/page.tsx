@@ -10,18 +10,18 @@ export default function PhotographyPage() {
   const photos = [
     {
       src: '/photography/IMG_4295.JPG',
-      title: 'Washington Square Arch',
-      description: 'Historic arch with flying birds in NYC'
+      title: 'CN tower',
+      description: 'Red CN tower in Toronto'
     },
     {
       src: '/photography/IMG_3592.jpg',
-      title: 'Urban Landscape',
-      description: 'City architecture and urban scenes'
+      title: 'Toronto skyline',
+      description: 'Veiw of Toronto from lake Ontario'
     },
     {
       src: '/photography/IMG_1981 (1).jpg',
-      title: 'City Views',
-      description: 'Exploring the urban environment'
+      title: 'Washington Square Arch',
+      description: 'Historic arch with flying birds in NYC'
     }
   ];
 
