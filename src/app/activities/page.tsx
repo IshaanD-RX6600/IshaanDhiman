@@ -39,15 +39,6 @@ export default function ActivitiesPage() {
             'Created small utility applications',
             'Experimenting with AI/ML projects'
           ]
-        },
-        {
-          title: 'GEOGUESSER club member',
-          period: '2025 - Present',
-          description: 'Active member of the Geoguesser club, participating in weekly geoguessing competitions and collaborative projects.',
-          achievements: [
-            'Participated in weekly geoguessing competitions',
-            'Contributed to club project repositories'
-          ]
         }
       ]
     },
@@ -89,6 +80,15 @@ export default function ActivitiesPage() {
     {
       category: 'Leadership & Community',
       items: [
+        {
+          title: 'GEOGUESSER club member',
+          period: '2025 - Present',
+          description: 'Active member of the Geoguesser club, participating in weekly geoguessing competitions and collaborative projects.',
+          achievements: [
+            'Participated in weekly geoguessing competitions',
+            'Contributed to club project repositories'
+          ]
+        },
         {
           title: 'South Asian Student Alliance',
           period: '2023 - Present',
