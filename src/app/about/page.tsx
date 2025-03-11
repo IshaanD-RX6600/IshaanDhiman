@@ -24,13 +24,14 @@ export default function AboutPage() {
           <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
             <p className="text-lg leading-relaxed mb-6">
               Hi there! I'm Ishaan Dhiman, a student with a deep passion for technology and programming. 
-              My journey in coding began with simple HTML websites and has evolved into building full-stack 
+              My journey in coding began with simple c++ programs and has evolved into building full-stack 
               applications. I'm particularly interested in web development and artificial intelligence.
             </p>
             <p className="text-lg leading-relaxed">
               When I'm not coding, you can find me participating in coding competitions, helping fellow 
-              students with their projects, or exploring new technologies. I believe in the power of 
-              technology to solve real-world problems and make a positive impact.
+              students with their projects, coaching soccer, or exploring new technologies. I believe in the power of 
+              technology to solve real-world problems and make a positive impact. I beleve that in whatever I do,
+              I should give my best and try to be the best at it and see how far I can go.
             </p>
           </div>
         </section>
