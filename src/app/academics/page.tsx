@@ -8,10 +8,9 @@ export const metadata: Metadata = {
 export default function AcademicsPage() {
   const examScores = [
     {
-      name: 'CCC Exam',
+      name: '2025 CCC Exam',
       score: '58/75',
-      percentage: '77.3%',
-      description: 'The Canadian Computing Competition (CCC) is a programming competition that tests problem-solving and algorithmic thinking skills.',
+      description: 'The Canadian Computing Competition (CCC) is a programming competition that tests problem-solving and algorithmic thinking skills. With each of the questions becoming exponentially harder, I was able to solve 4 questions correctly.',
       highlights: [
         'Above average performance in algorithmic challenges',
         'Strong problem-solving demonstration',
@@ -21,14 +20,23 @@ export default function AcademicsPage() {
     {
       name: 'Pascal Contest',
       score: '104/150',
-      percentage: '69.3%',
       description: 'The Pascal Contest is a mathematics competition that challenges students with complex problem-solving and mathematical reasoning.',
       highlights: [
         'Excellence in mathematical reasoning',
         'Creative problem-solving approach',
         'Strong analytical skills'
       ]
-    }
+    },
+    {
+      name: '2024 CCC Exam',
+      score: '45/75',
+      description: 'The Canadian Computing Competition (CCC) is a programming competition that tests problem-solving and algorithmic thinking skills. With each of the questions becoming exponentially harder, I was able to solve 3 questions correctly.',
+      highlights: [
+        'Above average performance in algorithmic challenges',
+        'Strong problem-solving demonstration',
+        'Efficient code implementation'
+      ]
+    },
   ];
 
   const otherAchievements = [
@@ -38,7 +46,7 @@ export default function AcademicsPage() {
       description: 'Maintained high academic standing throughout the academic year.'
     },
     {
-      title: 'Mathematics Club Leader',
+      title: 'Mathematics Club Member',
       year: '2023',
       description: 'Led weekly problem-solving sessions and organized math competitions.'
     }
@@ -71,9 +79,6 @@ export default function AcademicsPage() {
                   <div className="text-right">
                     <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                       {exam.score}
-                    </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      {exam.percentage}
                     </div>
                   </div>
                 </div>

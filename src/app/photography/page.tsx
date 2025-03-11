@@ -71,7 +71,7 @@ export default function PhotographyPage() {
             Photography has been a passion of mine, allowing me to capture and share unique perspectives of the world around us.
           </p>
           <p className="text-sm opacity-90">
-            Equipment: [Your camera/equipment details here]
+            Equipment: Iphone 12
           </p>
         </div>
       </div>
