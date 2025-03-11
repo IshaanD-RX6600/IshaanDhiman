@@ -19,8 +19,9 @@ export default function PhotographyPage() {
       description: 'City life and architecture'
     },
     {
-      src: '/photography/IMG_1981 (1).jpg',
+      src: '/photography/IMG_1981.jpg',
       title: 'Cityscapes',
+      description: 'Urban landscapes and city views'
     },
     // Add more photos as needed
   ];
@@ -51,11 +52,13 @@ export default function PhotographyPage() {
                   alt={photo.title}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={index < 3}
                 />
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-semibold mb-2">{photo.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400">{photo.description}</p>
+                <p className="text-gray-600 dark:text-gray-400">{photo.description || ''}</p>
               </div>
             </div>
           ))}
