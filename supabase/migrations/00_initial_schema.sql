@@ -1,170 +1,187 @@
 -- Create the website_content table
 CREATE TABLE website_content (
   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  content JSONB NOT NULL DEFAULT '{}'::jsonb,
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+  content JSONB NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
--- Create a row-level security policy
+-- Enable Row Level Security
 ALTER TABLE website_content ENABLE ROW LEVEL SECURITY;
 
--- Allow public read access
-CREATE POLICY "Allow public read access"
-  ON website_content
-  FOR SELECT
-  TO public
-  USING (true);
+-- Create policies
+CREATE POLICY "Enable read access for all users" ON website_content
+  FOR SELECT USING (true);
 
--- Allow authenticated users to update
-CREATE POLICY "Allow authenticated update"
-  ON website_content
-  FOR UPDATE
-  TO authenticated
-  USING (true)
-  WITH CHECK (true);
+CREATE POLICY "Enable update for authenticated users only" ON website_content
+  FOR UPDATE USING (auth.role() = 'authenticated');
 
--- Insert initial data
+-- Insert initial content
 INSERT INTO website_content (content) VALUES (
   '{
     "about": {
       "introduction": [
-        "Hi there! I''m Ishaan Dhiman, a student with a deep passion for technology and programming.",
-        "When I''m not coding, you can find me participating in coding competitions and helping fellow students with their projects."
+        "Hi, I''m Ishaan Dhiman, a passionate student developer with a keen interest in AI, machine learning, and web development.",
+        "I love exploring new technologies and building projects that solve real-world problems.",
+        "Currently focusing on expanding my knowledge in artificial intelligence and web development while maintaining a strong foundation in computer science fundamentals."
       ],
       "interests": [
         {
-          "title": "Coding",
-          "description": "I enjoy solving problems through code and building applications that make a difference."
+          "title": "Artificial Intelligence",
+          "description": "Exploring machine learning, computer vision, and natural language processing"
         },
         {
-          "title": "Learning",
-          "description": "I''m constantly learning new technologies and concepts."
+          "title": "Web Development",
+          "description": "Building modern web applications with Next.js and TypeScript"
         },
         {
-          "title": "Collaboration",
-          "description": "I love working with others on projects and sharing knowledge."
+          "title": "Software Engineering",
+          "description": "Creating efficient and scalable solutions to complex problems"
         }
       ],
       "goals": {
         "shortTerm": [
-          "Master full-stack web development",
-          "Contribute to open-source projects",
-          "Build a strong project portfolio",
-          "Improve problem-solving skills"
+          "Master Next.js and TypeScript for web development",
+          "Contribute to open-source AI projects",
+          "Improve my understanding of computer vision algorithms",
+          "Build more projects combining AI and web technologies"
         ],
         "longTerm": [
-          "Pursue higher education in Computer Science",
-          "Specialize in AI/ML development",
-          "Create impactful technology solutions",
-          "Mentor other aspiring developers"
+          "Become a full-stack AI engineer",
+          "Create innovative solutions that impact people''s lives",
+          "Contribute to the advancement of AI technology",
+          "Build a strong portfolio of diverse projects"
         ]
       }
     },
     "academics": {
       "examScores": [
         {
-          "name": "CCC Exam",
+          "name": "Canadian Computing Competition",
           "score": "58/75",
           "percentage": "77.3%",
-          "description": "The Canadian Computing Competition (CCC) is a programming competition that tests problem-solving and algorithmic thinking skills.",
+          "description": "Demonstrated strong problem-solving skills in algorithmic challenges",
           "highlights": [
-            "Above average performance in algorithmic challenges",
-            "Strong problem-solving demonstration",
-            "Efficient code implementation"
+            "Ranked in top percentile",
+            "Solved complex algorithmic problems",
+            "Applied efficient coding practices"
           ]
         },
         {
           "name": "Pascal Contest",
           "score": "104/150",
           "percentage": "69.3%",
-          "description": "The Pascal Contest is a mathematics competition that challenges students with complex problem-solving and mathematical reasoning.",
+          "description": "Showcased mathematical and computational thinking abilities",
           "highlights": [
-            "Excellence in mathematical reasoning",
-            "Creative problem-solving approach",
-            "Strong analytical skills"
+            "Strong performance in mathematical reasoning",
+            "Effective problem-solving approach",
+            "Quick analytical thinking"
           ]
         }
       ],
       "achievements": [
         {
-          "title": "Academic Honor Roll",
-          "year": "2023",
-          "description": "Maintained high academic standing throughout the academic year."
+          "title": "AI Project Recognition",
+          "description": "Developed innovative face swapping application",
+          "date": "2023"
         },
         {
-          "title": "Mathematics Club Leader",
-          "year": "2023",
-          "description": "Led weekly problem-solving sessions and organized math competitions."
+          "title": "Web Development Portfolio",
+          "description": "Created multiple full-stack web applications",
+          "date": "2023"
         }
       ]
     },
     "projects": [
       {
-        "title": "Student Showcase Website",
-        "description": "A modern portfolio website built with Next.js and Tailwind CSS.",
-        "tech": ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+        "title": "Face Swap Application",
+        "description": "An advanced face swapping tool that can replace faces in videos using just a single reference image. Built with Python and deep learning, this project requires no dataset or training.",
+        "technologies": ["Python", "Computer Vision", "Deep Learning"],
         "features": [
-          "Responsive design with dark mode",
-          "Dynamic content management",
-          "SEO optimization",
-          "Contact form integration"
+          "Single image face replacement",
+          "Video processing support",
+          "No training required",
+          "Multiple face detection"
         ],
-        "github": "https://github.com/yourusername/student-showcase",
-        "demo": "https://student-showcase.vercel.app"
+        "github": "https://github.com/IshaanD-RX6600/Face-Swap",
+        "type": "AI & Computer Vision"
       },
       {
-        "title": "Python Utility Scripts",
-        "description": "A collection of Python scripts for automating various tasks.",
-        "tech": ["Python", "Pandas", "NumPy"],
+        "title": "Chess Game Engine",
+        "description": "A TypeScript-based chess library for move generation, validation, and game state management. Features support for FEN notation and PGN format.",
+        "technologies": ["TypeScript", "Chess.js", "Game Development"],
         "features": [
-          "Data processing utilities",
-          "File management tools",
-          "Algorithm implementations",
-          "Command-line interfaces"
+          "Move validation",
+          "Game state management",
+          "FEN/PGN support",
+          "Headless architecture"
         ],
-        "github": "https://github.com/yourusername/python-utils"
+        "github": "https://github.com/IshaanD-RX6600/Playing-around-with-chess",
+        "type": "Game Development"
+      },
+      {
+        "title": "Handwritten Text Recognition",
+        "description": "Convert handwritten text into digital format using advanced OCR and machine learning techniques.",
+        "technologies": ["Python", "OCR", "Machine Learning"],
+        "features": [
+          "Handwriting recognition",
+          "Text extraction",
+          "Digital conversion",
+          "Image processing"
+        ],
+        "github": "https://github.com/IshaanD-RX6600/Handwritten-to-text",
+        "type": "AI & Machine Learning"
+      },
+      {
+        "title": "Student Help Website",
+        "description": "A platform designed to assist students with resources and tools for academic success.",
+        "technologies": ["Web Development", "Educational Tech"],
+        "features": [
+          "Resource management",
+          "Student tools",
+          "Academic support",
+          "User-friendly interface"
+        ],
+        "github": "https://github.com/IshaanD-RX6600/Student-Help-Website",
+        "type": "Web Development"
       }
     ],
     "activities": {
       "categories": [
         {
-          "name": "Tech & Coding",
+          "name": "Programming",
           "items": [
-            {
-              "title": "Coding Club Member",
-              "period": "2023 - Present",
-              "description": "Active member of the school coding club.",
-              "achievements": [
-                "Organized coding workshops",
-                "Participated in team competitions",
-                "Contributed to club projects"
-              ]
-            }
+            "Participating in coding competitions",
+            "Contributing to open-source projects",
+            "Building personal projects"
+          ]
+        },
+        {
+          "name": "Learning",
+          "items": [
+            "Taking online courses in AI and web development",
+            "Reading technical documentation and blogs",
+            "Experimenting with new technologies"
           ]
         }
       ],
       "skills": [
         {
-          "category": "Technical Skills",
-          "items": [
-            "HTML, CSS, JavaScript",
-            "React & Next.js",
-            "Python Programming",
-            "Git Version Control",
-            "Basic Database Management"
-          ]
+          "category": "Programming Languages",
+          "items": ["Python", "TypeScript", "JavaScript"]
         },
         {
-          "category": "Soft Skills",
-          "items": [
-            "Problem Solving",
-            "Team Collaboration",
-            "Time Management",
-            "Written Communication",
-            "Public Speaking"
-          ]
+          "category": "Web Technologies",
+          "items": ["Next.js", "React", "Tailwind CSS"]
+        },
+        {
+          "category": "AI & ML",
+          "items": ["Computer Vision", "OCR", "Deep Learning"]
+        },
+        {
+          "category": "Tools",
+          "items": ["Git", "VS Code", "Supabase"]
         }
       ]
     }
-  }'::jsonb
+  }'
 ); 
