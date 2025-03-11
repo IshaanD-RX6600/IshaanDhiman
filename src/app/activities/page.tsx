@@ -43,6 +43,41 @@ export default function ActivitiesPage() {
       ]
     },
     {
+      category: 'Hackathons',
+      items: [
+        {
+          title: 'Hack the North 2024',
+          period: '2024',
+          description: 'Participated in Canada\'s biggest hackathon at the University of Waterloo, collaborating with peers to build innovative solutions.',
+          achievements: [
+            'Developed a project within 36 hours',
+            'Collaborated with team members from diverse backgrounds',
+            'Gained experience with rapid prototyping and development'
+          ]
+        },
+        {
+          title: 'Hawkhacks 2024',
+          period: '2024',
+          description: 'Participated in Wilfrid Laurier University\'s annual hackathon, focusing on creating impactful technology solutions.',
+          achievements: [
+            'Worked on innovative project ideas',
+            'Networked with industry professionals',
+            'Enhanced problem-solving skills under time constraints'
+          ]
+        },
+        {
+          title: 'Ignition Hacks 2024',
+          period: '2024',
+          description: 'Participated in this dynamic hackathon focused on fostering innovation and technological creativity.',
+          achievements: [
+            'Developed solutions to real-world problems',
+            'Engaged in workshops and mentorship sessions',
+            'Practiced pitching and presentation skills'
+          ]
+        }
+      ]
+    },
+    {
       category: 'Leadership & Community',
       items: [
         {
