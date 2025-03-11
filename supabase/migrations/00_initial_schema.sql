@@ -58,7 +58,6 @@ INSERT INTO website_content (content) VALUES (
         {
           "name": "Canadian Computing Competition",
           "score": "58/75",
-          "percentage": "77.3%",
           "description": "Demonstrated strong problem-solving skills in algorithmic challenges",
           "highlights": [
             "Ranked in top percentile",
@@ -69,7 +68,6 @@ INSERT INTO website_content (content) VALUES (
         {
           "name": "Pascal Contest",
           "score": "104/150",
-          "percentage": "69.3%",
           "description": "Showcased mathematical and computational thinking abilities",
           "highlights": [
             "Strong performance in mathematical reasoning",
