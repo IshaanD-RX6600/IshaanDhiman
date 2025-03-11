@@ -25,6 +25,12 @@ export default function ContactPage() {
       value: 'Connect with me',
       href: 'https://linkedin.com/in/your-profile',
       icon: '🔗'
+    },
+    {
+      title: 'Instagram',
+      value: 'Connect with me',
+      href: 'https://www.instagram.com/ishaan_7484/',
+      icon: '📸'
     }
   ];
 
@@ -64,6 +70,12 @@ export default function ContactPage() {
           <p className="mb-6">
             Whether you have a project in mind or just want to say hi, I'd love to hear from you!
           </p>
+          <a
+            href="mailto:ishaandhiman74@gmail.com"
+            className="inline-block bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-all duration-300 mb-6"
+          >
+            Send me an Email
+          </a>
           <p className="text-sm opacity-90">
             Response Time: Usually within 24-48 hours
           </p>
