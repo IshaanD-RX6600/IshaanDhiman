@@ -147,45 +147,45 @@ export default function ActivitiesPage() {
   ];
 
   return (
-    <div className="min-h-screen py-12 px-4">
+    <div className="min-h-screen py-6 sm:py-12 px-3 sm:px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
+        <div className="text-center mb-8 sm:mb-16">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
             Activities & Skills
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto px-2">
             Exploring my journey beyond academics through various activities and skill development.
           </p>
         </div>
 
         {/* Activities */}
-        <div className="space-y-16">
+        <div className="space-y-8 sm:space-y-16">
           {activities.map((section, index) => (
             <div key={index}>
-              <h2 className="text-2xl font-bold mb-8 text-blue-600 dark:text-blue-400">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-8 text-blue-600 dark:text-blue-400 px-2 sm:px-0">
                 {section.category}
               </h2>
-              <div className="space-y-8">
+              <div className="space-y-4 sm:space-y-8">
                 {section.items.map((activity, itemIndex) => (
                   <div
                     key={itemIndex}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                    className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow"
                   >
-                    <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-semibold">{activity.title}</h3>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 sm:mb-4">
+                      <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-0">{activity.title}</h3>
                       <span className="text-sm text-gray-500 dark:text-gray-400">
                         {activity.period}
                       </span>
                     </div>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
                       {activity.description}
                     </p>
                     <div>
-                      <h4 className="font-semibold mb-2">Key Achievements:</h4>
-                      <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
+                      <h4 className="font-semibold mb-2 text-sm sm:text-base">Key Achievements:</h4>
+                      <ul className="list-disc list-inside text-sm sm:text-base text-gray-600 dark:text-gray-400 space-y-1">
                         {activity.achievements.map((achievement, aIndex) => (
-                          <li key={aIndex}>{achievement}</li>
+                          <li key={aIndex} className="pl-1">{achievement}</li>
                         ))}
                       </ul>
                     </div>
@@ -197,22 +197,22 @@ export default function ActivitiesPage() {
         </div>
 
         {/* Skills Grid */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-8">Skills & Learning</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-8 sm:mt-16">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-8 px-2 sm:px-0">Skills & Learning</h2>
+          <div className="grid grid-cols-1 gap-4 sm:gap-8 px-0">
             {skills.map((skillSet, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg"
+                className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-lg"
               >
-                <h3 className="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">
+                <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-blue-600 dark:text-blue-400">
                   {skillSet.category}
                 </h3>
-                <ul className="space-y-2">
+                <ul className="space-y-2 grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {skillSet.items.map((skill, skillIndex) => (
                     <li
                       key={skillIndex}
-                      className="flex items-center text-gray-600 dark:text-gray-400"
+                      className="flex items-center text-sm sm:text-base text-gray-600 dark:text-gray-400"
                     >
                       <span className="mr-2">•</span>
                       {skill}
@@ -225,15 +225,15 @@ export default function ActivitiesPage() {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white text-center">
-          <h2 className="text-2xl font-bold mb-4">Want to Collaborate?</h2>
-          <p className="mb-6">
+        <div className="mt-8 sm:mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 sm:p-8 text-white text-center mx-2 sm:mx-0">
+          <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Want to Collaborate?</h2>
+          <p className="mb-4 sm:mb-6 text-sm sm:text-base">
             I'm always excited to work on new projects and learn from others.
             Let's create something amazing together!
           </p>
           <a
             href="/contact"
-            className="inline-block px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors"
+            className="inline-block px-6 sm:px-8 py-2 sm:py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors text-sm sm:text-base"
           >
             Get in Touch
           </a>
