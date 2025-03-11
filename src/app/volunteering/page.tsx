@@ -23,7 +23,7 @@ export default function VolunteeringPage() {
         <section className="mb-12">
           <div className="grid grid-cols-1 gap-6">
             {/* Assistant Coach */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4">
                 <h3 className="text-xl font-semibold mb-2 sm:mb-0">Assistant Coach at Budd Park</h3>
                 <span className="text-blue-600 dark:text-blue-400 font-medium">26 Hours</span>
@@ -41,7 +41,7 @@ export default function VolunteeringPage() {
             </div>
 
             {/* Kids Yoga Camp */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4">
                 <h3 className="text-xl font-semibold mb-2 sm:mb-0">Kids Yoga Camp Volunteer</h3>
                 <span className="text-blue-600 dark:text-blue-400 font-medium">35 Hours</span>
@@ -59,7 +59,7 @@ export default function VolunteeringPage() {
             </div>
 
             {/* Hackathon */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4">
                 <h3 className="text-xl font-semibold mb-2 sm:mb-0">Hackathon Volunteer</h3>
                 <span className="text-blue-600 dark:text-blue-400 font-medium">19 Hours</span>
@@ -83,17 +83,17 @@ export default function VolunteeringPage() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">
             Total Impact
           </h2>
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div className="text-center">
+              <div className="text-center transform transition-transform hover:scale-110">
                 <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">80+</div>
                 <div className="text-gray-600 dark:text-gray-400">Total Hours</div>
               </div>
-              <div className="text-center">
+              <div className="text-center transform transition-transform hover:scale-110">
                 <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">3</div>
                 <div className="text-gray-600 dark:text-gray-400">Organizations</div>
               </div>
-              <div className="text-center">
+              <div className="text-center transform transition-transform hover:scale-110">
                 <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">100+</div>
                 <div className="text-gray-600 dark:text-gray-400">People Impacted</div>
               </div>

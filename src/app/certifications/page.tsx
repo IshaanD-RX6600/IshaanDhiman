@@ -27,10 +27,10 @@ export default function CertificationsPage() {
 
             <div className="space-y-12">
               {/* Bronze Medallion */}
-              <div className="relative">
-                <div className="flex flex-col sm:flex-row items-center">
+              <div className="relative flex justify-center">
+                <div className="flex flex-col sm:flex-row items-center w-full">
                   <div className="flex-1 w-full sm:w-1/2 sm:pr-8">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
                       <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4">
                         <h3 className="text-xl font-semibold mb-2 sm:mb-0">Bronze Medallion</h3>
                         <span className="text-blue-600 dark:text-blue-400 font-medium">20 Hours + Written Test</span>
@@ -54,10 +54,10 @@ export default function CertificationsPage() {
               </div>
 
               {/* Bronze Cross */}
-              <div className="relative">
-                <div className="flex flex-col sm:flex-row items-center">
+              <div className="relative flex justify-center">
+                <div className="flex flex-col sm:flex-row items-center w-full">
                   <div className="flex-1 w-full sm:w-1/2 sm:pl-8 sm:ml-auto">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
                       <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4">
                         <h3 className="text-xl font-semibold mb-2 sm:mb-0">Bronze Cross</h3>
                         <span className="text-blue-600 dark:text-blue-400 font-medium">40 Hours + Written Test</span>
@@ -81,10 +81,10 @@ export default function CertificationsPage() {
               </div>
 
               {/* Assistant Instructor */}
-              <div className="relative">
-                <div className="flex flex-col sm:flex-row items-center">
+              <div className="relative flex justify-center">
+                <div className="flex flex-col sm:flex-row items-center w-full">
                   <div className="flex-1 w-full sm:w-1/2 sm:pr-8">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border-2 border-blue-600/20">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-2 border-blue-600/20">
                       <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4">
                         <h3 className="text-xl font-semibold mb-2 sm:mb-0">Assistant Instructor</h3>
                         <span className="text-blue-600 dark:text-blue-400 font-medium">In Progress</span>
@@ -112,7 +112,7 @@ export default function CertificationsPage() {
 
         {/* Stats Section */}
         <section className="mb-12">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">60+</div>
