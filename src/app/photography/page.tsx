@@ -9,21 +9,20 @@ export const metadata: Metadata = {
 export default function PhotographyPage() {
   const photos = [
     {
-      src: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d',
-      title: 'Nature',
-      description: 'Exploring the beauty of natural landscapes'
+      src: '/photography/IMG_4295.JPG',
+      title: 'Washington Square Arch',
+      description: 'Historic arch with flying birds in NYC'
     },
     {
-      src: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000',
-      title: 'Urban',
-      description: 'City life and architecture'
+      src: '/photography/IMG_3592.jpg',
+      title: 'Urban Landscape',
+      description: 'City architecture and urban scenes'
     },
     {
-      src: 'https://images.unsplash.com/photo-1514565131-fce0801e5785',
-      title: 'Cityscapes',
-      description: 'Urban landscapes and city views'
-    },
-    // Add more photos as needed
+      src: '/photography/IMG_1981 (1).jpg',
+      title: 'City Views',
+      description: 'Exploring the urban environment'
+    }
   ];
 
   return (
