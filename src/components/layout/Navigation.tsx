@@ -24,6 +24,7 @@ export default function Navigation() {
     { href: '/projects', label: 'Projects' },
     { href: '/activities', label: 'Activities' },
     { href: '/volunteering', label: 'Volunteering' },
+    { href: '/certifications', label: 'Certifications' },
     { href: '/photography', label: 'Photography' },
     { href: '/contact', label: 'Contact' },
   ];
