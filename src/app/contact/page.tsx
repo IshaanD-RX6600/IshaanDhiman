@@ -11,7 +11,7 @@ export default function ContactPage() {
     {
       title: 'Email',
       value: 'ishaandhiman74@gmail.com',
-      href: 'mailto:ishaandhiman74@gmail.com',
+      href: 'https://mail.google.com/mail/u/0/?hl=en/#spam?compose=GTvVlcSHwsPZFBStQVpRVhBnQxDXNtVKRjVpqDPknKNVrGxgjDHSHGWrmJHSnfDhkfzKRqtvfRDnL',
       icon: '📧'
     },
     {
