@@ -37,6 +37,16 @@ export default function AcademicsPage() {
         'Efficient code implementation'
       ]
     },
+    {
+      name: 'Grade 10 Math final Exam',
+      score: '97%',
+      description: 'I was able to score full marks in the final exam of Grade 10 Math. This was a great achievement for me as I was able to understand the concepts and apply them to the questions.',
+      highlights: [
+        'Full marks in the final exam',
+        'Strong understanding of the concepts',
+        'Efficient problem-solving'
+      ]
+    },
   ];
 
   const otherAchievements = [
