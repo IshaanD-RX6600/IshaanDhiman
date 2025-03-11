@@ -10,8 +10,8 @@ export default function ContactPage() {
   const contactInfo = [
     {
       title: 'Email',
-      value: 'your.email@example.com',
-      href: 'mailto:your.email@example.com',
+      value: 'ishaandhiman74@gmail.com',
+      href: 'mailto:ishaandhiman74@gmail.com',
       icon: '📧'
     },
     {
