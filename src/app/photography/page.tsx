@@ -9,17 +9,17 @@ export const metadata: Metadata = {
 export default function PhotographyPage() {
   const photos = [
     {
-      src: '/photography/photo1.jpg',
+      src: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d',
       title: 'Nature',
       description: 'Exploring the beauty of natural landscapes'
     },
     {
-      src: '/photography/photo2.jpg',
+      src: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000',
       title: 'Urban',
       description: 'City life and architecture'
     },
     {
-      src: '/photography/IMG_1981.jpg',
+      src: 'https://images.unsplash.com/photo-1514565131-fce0801e5785',
       title: 'Cityscapes',
       description: 'Urban landscapes and city views'
     },
@@ -54,6 +54,7 @@ export default function PhotographyPage() {
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   priority={index < 3}
+                  unoptimized={photo.src.startsWith('http')}
                 />
               </div>
               <div className="p-6">
