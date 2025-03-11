@@ -19,7 +19,7 @@ export default function PhotographyPage() {
       description: 'City life and architecture'
     },
     {
-      src: 'IMG_1981 (1).jpg',
+      src: '/photography/IMG_1981 (1).jpg',
       title: 'Cityscapes',
     },
     // Add more photos as needed
