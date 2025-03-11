@@ -36,7 +36,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
@@ -48,7 +48,7 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Information */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {contactInfo.map((info, index) => (
             <a
               key={index}
@@ -59,7 +59,7 @@ export default function ContactPage() {
             >
               <div className="text-7xl mb-8">{info.icon}</div>
               <h3 className="text-3xl font-semibold mb-4">{info.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-xl text-center break-all">{info.value}</p>
+              <p className="text-gray-600 dark:text-gray-400 text-xl text-center break-words">{info.value}</p>
             </a>
           ))}
         </div>
