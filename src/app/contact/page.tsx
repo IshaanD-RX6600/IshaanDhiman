@@ -109,16 +109,8 @@ export default function ContactPage() {
             Whether you have a project in mind or just want to say hi, I'd love to hear from you!
           </p>
           <a
-            href="mailto:ishaandhiman74@gmail.com?subject=Let's%20Connect!&body=Hi%20Ishaan,%0D%0A%0D%0AI'd%20like%20to%20connect%20regarding%20..."
+            href="mailto:ishaandhiman74@gmail.com"
             className="inline-block bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-all duration-300 mb-6"
-            onClick={(e) => {
-              // Fallback for when mailto doesn't work
-              if (!window.open(e.currentTarget.href)) {
-                // If the mailto link fails, copy email to clipboard
-                navigator.clipboard.writeText('ishaandhiman74@gmail.com');
-                alert('Email address copied to clipboard: ishaandhiman74@gmail.com');
-              }
-            }}
           >
             Send me an Email
           </a>
