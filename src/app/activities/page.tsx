@@ -11,6 +11,16 @@ export default function ActivitiesPage() {
       category: 'Tech & Coding',
       items: [
         {
+          title: 'STEAM Club Member',
+          period: '2023 - Present',
+          description: 'Active member of the STEAM club, participating in interdisciplinary projects combining science, technology, engineering, arts, and mathematics.',
+          achievements: [
+            'Collaborated on cross-disciplinary projects',
+            'Participated in STEAM workshops and events',
+            'Contributed to innovative solutions'
+          ]
+        },
+        {
           title: 'Coding Club Member',
           period: '2023 - Present',
           description: 'Active member of the school coding club, participating in weekly coding challenges and collaborative projects.',
@@ -35,6 +45,16 @@ export default function ActivitiesPage() {
     {
       category: 'Leadership & Community',
       items: [
+        {
+          title: 'South Asian Student Alliance',
+          period: '2023 - Present',
+          description: 'Active member in leadership role, fostering community and cultural awareness.',
+          achievements: [
+            'Organized cultural events and activities',
+            'Promoted diversity and inclusion initiatives',
+            'Built connections within the South Asian community'
+          ]
+        },
         {
           title: 'Student Tech Support',
           period: '2023',
