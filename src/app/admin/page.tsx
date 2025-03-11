@@ -5,10 +5,10 @@ import { supabase } from '@/lib/supabase';
 import { useState, useEffect } from 'react';
 import type { WebsiteContent } from '@/lib/supabase';
 
-export const metadata: Metadata = {
-  title: 'Admin - Ishaan Dhiman',
-  description: 'Admin dashboard for content management.',
-};
+// export const metadata: Metadata = {
+//   title: 'Admin - Ishaan Dhiman',
+//   description: 'Admin dashboard for content management.',
+// };
 
 export default function AdminPage() {
   const [content, setContent] = useState<WebsiteContent['content']>({
