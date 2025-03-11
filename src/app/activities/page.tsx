@@ -11,12 +11,12 @@ export default function ActivitiesPage() {
       category: 'Tech & Coding',
       items: [
         {
-          title: 'STEAM Club Member',
+          title: 'STEM Club Member',
           period: '2023 - Present',
-          description: 'Active member of the STEAM club, participating in interdisciplinary projects combining science, technology, engineering, arts, and mathematics.',
+          description: 'Active member of the STEM club, participating in interdisciplinary projects combining science, technology, engineering, arts, and mathematics.',
           achievements: [
             'Collaborated on cross-disciplinary projects',
-            'Participated in STEAM workshops and events',
+            'Participated in STEM workshops and events',
             'Contributed to innovative solutions'
           ]
         },
@@ -38,6 +38,15 @@ export default function ActivitiesPage() {
             'Built this portfolio website using Next.js',
             'Created small utility applications',
             'Experimenting with AI/ML projects'
+          ]
+        },
+        {
+          title: 'GEOGUESSER club member',
+          period: '2025 - Present',
+          description: 'Active member of the Geoguesser club, participating in weekly geoguessing competitions and collaborative projects.',
+          achievements: [
+            'Participated in weekly geoguessing competitions',
+            'Contributed to club project repositories'
           ]
         }
       ]
