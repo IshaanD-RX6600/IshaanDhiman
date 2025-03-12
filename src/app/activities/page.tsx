@@ -223,6 +223,7 @@ export default function ActivitiesPage() {
             ))}
           </div>
         </div>
+        
 
         {/* Call to Action */}
         <div className="mt-8 sm:mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 sm:p-8 text-white text-center mx-2 sm:mx-0">
