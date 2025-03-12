@@ -198,11 +198,11 @@ export default function AcademicsPage() {
                 <p className="text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Course 3:</span> TBD
                 </p>
-              </div>
-              <div className="space-y-2">
                 <p className="text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Course 4:</span> TBD
                 </p>
+              </div>
+              <div className="space-y-2">
                 <p className="text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Course 5:</span> TBD
                 </p>
