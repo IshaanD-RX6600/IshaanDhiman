@@ -2,10 +2,66 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Academics - Ishaan Dhiman',
-  description: 'My academic journey and course history.',
+  description: 'My academic journey, achievements, and course history.',
 };
 
 export default function AcademicsPage() {
+  const examScores = [
+    {
+      name: '2025 CCC Exam',
+      score: '58/75',
+      description: 'The Canadian Computing Competition (CCC) is a programming competition that tests problem-solving and algorithmic thinking skills. With each of the questions becoming exponentially harder, I was able to solve 4 questions correctly.',
+      highlights: [
+        'Above average performance in algorithmic challenges',
+        'Strong problem-solving demonstration',
+        'Efficient code implementation'
+      ]
+    },
+    {
+      name: 'Pascal Contest',
+      score: '104/150',
+      description: 'The Pascal Contest is a mathematics competition that challenges students with complex problem-solving and mathematical reasoning.',
+      highlights: [
+        'Excellence in mathematical reasoning',
+        'Creative problem-solving approach',
+        'Strong analytical skills'
+      ]
+    },
+    {
+      name: '2024 CCC Exam',
+      score: '45/75',
+      description: 'The Canadian Computing Competition (CCC) is a programming competition that tests problem-solving and algorithmic thinking skills. With each of the questions becoming exponentially harder, I was able to solve 3 questions correctly.',
+      highlights: [
+        'Above average performance in algorithmic challenges',
+        'Strong problem-solving demonstration',
+        'Efficient code implementation'
+      ]
+    },
+    {
+      name: 'Grade 10 Math final Exam',
+      score: '97%',
+      description: 'I was able to score full marks in the final exam of Grade 10 Math. This was a great achievement for me as I was able to understand the concepts and apply them to the questions.',
+      highlights: [
+        'Full marks in the final exam',
+        'Strong understanding of the concepts',
+        'Efficient problem-solving'
+      ]
+    },
+  ];
+
+  const otherAchievements = [
+    {
+      title: 'Academic Honor Roll',
+      year: '2023',
+      description: 'Maintained high academic standing throughout the academic year.'
+    },
+    {
+      title: 'Mathematics Club Member',
+      year: '2023',
+      description: 'Led weekly problem-solving sessions and organized math competitions.'
+    }
+  ];
+
   return (
     <div className="min-h-screen py-8 sm:py-12 px-3 sm:px-4">
       <div className="max-w-4xl mx-auto">
@@ -15,12 +71,14 @@ export default function AcademicsPage() {
             Academic Journey
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400">
-            My educational path and course history
+            My educational path, achievements, and course history
           </p>
         </div>
 
         {/* Course Timeline */}
-        <div className="space-y-8">
+        <div className="space-y-8 mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">Course History</h2>
+          
           {/* Grade 9 */}
           <section className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
             <h2 className="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">Grade 9 (Completed)</h2>
@@ -156,8 +214,79 @@ export default function AcademicsPage() {
           </section>
         </div>
 
+        {/* Exam Scores */}
+        <div className="mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">Competition & Exam Scores</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {examScores.map((exam, index) => (
+              <div
+                key={index}
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4">
+                  <h3 className="text-xl font-semibold mb-2 sm:mb-0">{exam.name}</h3>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                      {exam.score}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  {exam.description}
+                </p>
+                <div className="space-y-2">
+                  <h4 className="font-semibold">Key Highlights:</h4>
+                  <ul className="list-disc list-inside text-gray-600 dark:text-gray-400">
+                    {exam.highlights.map((highlight, hIndex) => (
+                      <li key={hIndex}>{highlight}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Other Achievements */}
+        <div className="mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">Other Academic Achievements</h2>
+          <div className="space-y-6">
+            {otherAchievements.map((achievement, index) => (
+              <div
+                key={index}
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-xl font-semibold">{achievement.title}</h3>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    {achievement.year}
+                  </span>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {achievement.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Academic Goals */}
+        <div className="mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">Academic Goals</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              I am committed to continuous learning and academic excellence. My current goals include:
+            </p>
+            <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
+              <li>Participating in advanced programming competitions</li>
+              <li>Expanding knowledge in artificial intelligence and machine learning</li>
+              <li>Maintaining strong academic performance while pursuing practical projects</li>
+            </ul>
+          </div>
+        </div>
+
         {/* Call to Action */}
-        <section className="text-center mt-12">
+        <section className="text-center">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 sm:p-8 text-white">
             <h2 className="text-xl sm:text-2xl font-bold mb-4">Want to Know More?</h2>
             <p className="mb-6 text-lg">
