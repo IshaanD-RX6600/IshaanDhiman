@@ -209,6 +209,12 @@ export default function AcademicsPage() {
                 <p className="text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Course 6:</span> TBD
                 </p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  <span className="font-medium">Course 7:</span> TBD
+                </p>
+                <p className="text-gray-600 dark:text-gray-400">
+                  <span className="font-medium">Course 8:</span> TBD
+                </p>
               </div>
             </div>
           </section>
