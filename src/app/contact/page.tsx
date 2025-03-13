@@ -23,7 +23,7 @@ export default function ContactPage() {
     {
       title: 'LinkedIn',
       value: '@ishaan-dhiman',
-      href: 'https://www.linkedin.com/in/ishaan-undefined-835a872a4/',
+      href: 'https://www.linkedin.com/in/ishaan-dhiman-835a872a4/',
       icon: '🔗'
     },
     {
