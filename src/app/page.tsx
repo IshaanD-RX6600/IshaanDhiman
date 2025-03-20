@@ -7,7 +7,100 @@ export const metadata: Metadata = {
   description: 'Welcome to my portfolio. I am a passionate student developer focusing on web development and AI.',
 };
 
-export default function Home() {
+async function getGitHubStats() {
+  try {
+    const username = 'IshaanD-RX6600';
+    const token = process.env.GITHUB_ACCESS_TOKEN;
+
+    // GraphQL query to get total commits
+    const query = `
+      query {
+        user(login: "${username}") {
+          contributionsCollection {
+            totalCommitContributions
+            restrictedContributionsCount
+          }
+          repositories(first: 100, ownerAffiliations: OWNER) {
+            nodes {
+              defaultBranchRef {
+                target {
+                  ... on Commit {
+                    history {
+                      totalCount
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    // Fetch data using GraphQL
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query }),
+      next: { revalidate: 3600 } // Revalidate every hour
+    });
+
+    const data = await response.json();
+    
+    if (!data.data) {
+      throw new Error('No data received from GitHub');
+    }
+
+    // Calculate total commits
+    const totalCommits = data.data.user.repositories.nodes.reduce((total: number, repo: any) => {
+      if (repo.defaultBranchRef?.target?.history?.totalCount) {
+        return total + repo.defaultBranchRef.target.history.totalCount;
+      }
+      return total;
+    }, 0);
+
+    // Get repositories to count technologies
+    const reposResponse = await fetch(`https://api.github.com/users/${username}/repos`);
+    const repos = await reposResponse.json();
+
+    // Count unique technologies
+    const languages = new Set();
+    await Promise.all(repos.map(async (repo: any) => {
+      if (repo.language) {
+        languages.add(repo.language);
+      }
+      const langResponse = await fetch(repo.languages_url, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const langData = await langResponse.json();
+      Object.keys(langData).forEach(lang => languages.add(lang));
+    }));
+
+    return {
+      projects: repos.length,
+      totalCommits: totalCommits,
+      technologies: languages.size,
+      hackathons: 3
+    };
+  } catch (error) {
+    console.error('Error fetching GitHub stats:', error);
+    return {
+      projects: 0,
+      totalCommits: 0,
+      technologies: 0,
+      hackathons: 0
+    };
+  }
+}
+
+export default async function Home() {
+  const stats = await getGitHubStats();
+  
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -26,9 +119,17 @@ export default function Home() {
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-[length:200%_auto] text-transparent bg-clip-text animate-gradient">
             Ishaan Dhiman
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fade-in">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fade-in bg-gradient-to-r from-blue-600 to-purple-600 bg-[length:200%_auto] text-transparent bg-clip-text">
             Aspiring Developer & Passionate Learner
           </p>
+          <div className="max-w-3xl mx-auto mb-8 text-gray-700 dark:text-gray-300 text-base sm:text-lg animate-fade-in">
+            <p className="mb-4">
+              Hi, I'm Ishaan Dhiman, a passionate grade 10 student with a love for coding, web development, and problem-solving. I'm currently exploring backend development, physics, and math while working on exciting projects, including a website for my coding club. My tech stack includes React, Next.js, Tailwind CSS, Supabase, and Vercel, and I'm always eager to learn and improve.
+            </p>
+            <p>
+              When I'm not coding, you'll find me experimenting with new technologies, biking, playing soccer with my friends, refining my skills, or collaborating on innovative projects. Let's build something amazing together!
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-fade-in-up">
             <Link
               href="/projects"
@@ -58,6 +159,53 @@ export default function Home() {
           >
             <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
           </svg>
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-12 bg-gray-900 dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <div className="flex flex-col items-center">
+              <div className="text-blue-500 mb-2">
+                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                </svg>
+              </div>
+              <div className="text-4xl font-bold text-white mb-1">{stats.projects}+</div>
+              <div className="text-gray-400 text-sm text-center">Projects Completed</div>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="text-blue-500 mb-2">
+                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+                </svg>
+              </div>
+              <div className="text-4xl font-bold text-white mb-1">{stats.hackathons}+</div>
+              <div className="text-gray-400 text-sm text-center">Hackathons</div>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="text-blue-500 mb-2">
+                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                </svg>
+              </div>
+              <div className="text-4xl font-bold text-white mb-1">{stats.totalCommits}</div>
+              <div className="text-gray-400 text-sm text-center">Total Commits</div>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="text-blue-500 mb-2">
+                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9h8v2h-8zm0-3h8v2h-8zm0 6h4v2h-4z"/>
+                </svg>
+              </div>
+              <div className="text-4xl font-bold text-white mb-1">{stats.technologies}+</div>
+              <div className="text-gray-400 text-sm text-center">Technologies</div>
+            </div>
+          </div>
         </div>
       </section>
 
