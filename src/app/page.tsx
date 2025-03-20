@@ -11,6 +11,18 @@ async function getGitHubStats() {
   try {
     const username = 'IshaanD-RX6600';
     const token = process.env.GITHUB_ACCESS_TOKEN;
+    
+    console.log('Token available:', !!token); // Check if token is available
+
+    if (!token) {
+      console.warn('GitHub token not available, using fallback values');
+      return {
+        projects: 8,
+        totalCommits: 27244, // Your actual total from earlier
+        technologies: 12,
+        hackathons: 3
+      };
+    }
 
     // GraphQL query to get total commits
     const query = `
@@ -41,16 +53,18 @@ async function getGitHubStats() {
     const response = await fetch('https://api.github.com/graphql', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': token ? `Bearer ${token}` : '',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query }),
-      next: { revalidate: 3600 } // Revalidate every hour
+      cache: 'no-store' // Disable caching entirely
     });
 
     const data = await response.json();
+    console.log('GitHub API response:', data); // Log the complete response
     
     if (!data.data) {
+      console.error('Error from GitHub API:', data);
       throw new Error('No data received from GitHub');
     }
 
