@@ -10,104 +10,58 @@ export const metadata: Metadata = {
 async function getGitHubStats() {
   try {
     const username = 'IshaanD-RX6600';
-    const token = process.env.GITHUB_ACCESS_TOKEN;
     
-    console.log('Token available:', !!token); // Check if token is available
-
-    if (!token) {
-      console.warn('GitHub token not available, using fallback values');
-      return {
-        projects: 8,
-        totalCommits: 27244, // Your actual total from earlier
-        technologies: 12,
-        hackathons: 3
-      };
-    }
-
-    // GraphQL query to get total commits
-    const query = `
-      query {
-        user(login: "${username}") {
-          contributionsCollection {
-            totalCommitContributions
-            restrictedContributionsCount
-          }
-          repositories(first: 100, ownerAffiliations: OWNER) {
-            nodes {
-              defaultBranchRef {
-                target {
-                  ... on Commit {
-                    history {
-                      totalCount
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
-
-    // Fetch data using GraphQL
-    const response = await fetch('https://api.github.com/graphql', {
-      method: 'POST',
+    // Fetch user data
+    const userResponse = await fetch(`https://api.github.com/users/${username}`, {
+      cache: 'no-store',
       headers: {
-        'Authorization': token ? `Bearer ${token}` : '',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query }),
-      cache: 'no-store' // Disable caching entirely
-    });
-
-    const data = await response.json();
-    console.log('GitHub API response:', data); // Log the complete response
-    
-    if (!data.data) {
-      console.error('Error from GitHub API:', data);
-      throw new Error('No data received from GitHub');
-    }
-
-    // Calculate total commits
-    const totalCommits = data.data.user.repositories.nodes.reduce((total: number, repo: any) => {
-      if (repo.defaultBranchRef?.target?.history?.totalCount) {
-        return total + repo.defaultBranchRef.target.history.totalCount;
+        'Accept': 'application/vnd.github.v3+json'
       }
-      return total;
-    }, 0);
-
-    // Get repositories to count technologies
-    const reposResponse = await fetch(`https://api.github.com/users/${username}/repos`);
-    const repos = await reposResponse.json();
-
-    // Count unique technologies
+    });
+    const userData = await userResponse.json();
+    
+    if (!userData || userData.message === "Not Found") {
+      throw new Error('GitHub user not found');
+    }
+    
+    // Fetch repositories
+    const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`, {
+      cache: 'no-store',
+      headers: {
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    const reposData = await reposResponse.json();
+    
+    if (!Array.isArray(reposData)) {
+      throw new Error('Unable to fetch repositories');
+    }
+    
+    // Count languages
     const languages = new Set();
-    await Promise.all(repos.map(async (repo: any) => {
+    reposData.forEach(repo => {
       if (repo.language) {
         languages.add(repo.language);
       }
-      const langResponse = await fetch(repo.languages_url, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const langData = await langResponse.json();
-      Object.keys(langData).forEach(lang => languages.add(lang));
-    }));
-
+    });
+    
+    // For commit count, we'll use the contribution count from the contributions calendar
+    // Using a constant here since GitHub API doesn't easily provide total commit count
+    // Alternatively, set a real-time scraper or use a GitHub Actions workflow to update this value
+    
     return {
-      projects: repos.length,
-      totalCommits: totalCommits,
+      projects: reposData.length,
+      totalCommits: userData.public_repos > 0 ? "300+" : "0", // Show "300+" instead of exact count
       technologies: languages.size,
       hackathons: 3
     };
   } catch (error) {
     console.error('Error fetching GitHub stats:', error);
     return {
-      projects: 0,
-      totalCommits: 0,
-      technologies: 0,
-      hackathons: 0
+      projects: 8,
+      totalCommits: "300+", // Show "300+" in fallback case too
+      technologies: 12,
+      hackathons: 3
     };
   }
 }
