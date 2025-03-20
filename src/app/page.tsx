@@ -1,6 +1,11 @@
 import { Metadata } from 'next';
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from 'next/dynamic';
+
+// Use dynamic import with no SSR for client components
+const CountUp = dynamic(() => import('@/components/CountUp'), { ssr: false });
+const ScrollAnimation = dynamic(() => import('@/components/ScrollAnimation'), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'Ishaan Dhiman - Student Developer',
@@ -140,7 +145,9 @@ export default async function Home() {
                   <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
                 </svg>
               </div>
-              <div className="text-4xl font-bold text-white mb-1">{stats.projects}+</div>
+              <div className="text-4xl font-bold text-white mb-1">
+                <CountUp end={stats.projects} suffix="+" />
+              </div>
               <div className="text-gray-400 text-sm text-center">Projects Completed</div>
             </div>
             
@@ -150,7 +157,9 @@ export default async function Home() {
                   <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
                 </svg>
               </div>
-              <div className="text-4xl font-bold text-white mb-1">{stats.hackathons}+</div>
+              <div className="text-4xl font-bold text-white mb-1">
+                <CountUp end={stats.hackathons} suffix="+" />
+              </div>
               <div className="text-gray-400 text-sm text-center">Hackathons</div>
             </div>
             
@@ -160,7 +169,9 @@ export default async function Home() {
                   <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
                 </svg>
               </div>
-              <div className="text-4xl font-bold text-white mb-1">{stats.totalCommits}</div>
+              <div className="text-4xl font-bold text-white mb-1">
+                <CountUp end={stats.totalCommits} />
+              </div>
               <div className="text-gray-400 text-sm text-center">Total Commits</div>
             </div>
             
@@ -170,7 +181,9 @@ export default async function Home() {
                   <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9h8v2h-8zm0-3h8v2h-8zm0 6h4v2h-4z"/>
                 </svg>
               </div>
-              <div className="text-4xl font-bold text-white mb-1">{stats.technologies}+</div>
+              <div className="text-4xl font-bold text-white mb-1">
+                <CountUp end={stats.technologies} suffix="+" />
+              </div>
               <div className="text-gray-400 text-sm text-center">Technologies</div>
             </div>
           </div>
@@ -180,8 +193,10 @@ export default async function Home() {
       {/* Quick Overview */}
       <section className="py-12 sm:py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">At a Glance</h2>
-          <div className="grid grid-cols-1 gap-4 sm:gap-8 md:grid-cols-3">
+          <ScrollAnimation>
+            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">At a Glance</h2>
+          </ScrollAnimation>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 max-w-6xl mx-auto">
             {[
               {
                 title: "Academic Excellence",
@@ -202,17 +217,18 @@ export default async function Home() {
                 link: "/activities"
               }
             ].map((item, index) => (
-              <Link
-                href={item.link}
-                key={index}
-                className="p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:bg-white dark:hover:bg-gray-700"
-              >
-                <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{item.icon}</div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{item.title}</h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                  {item.description}
-                </p>
-              </Link>
+              <ScrollAnimation key={index} delay={index * 200}>
+                <Link
+                  href={item.link}
+                  className="block h-full p-8 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:bg-white dark:hover:bg-gray-700"
+                >
+                  <div className="text-4xl mb-5">{item.icon}</div>
+                  <h3 className="text-xl md:text-2xl font-semibold mb-4">{item.title}</h3>
+                  <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 break-words">
+                    {item.description}
+                  </p>
+                </Link>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
@@ -221,7 +237,9 @@ export default async function Home() {
       {/* Latest Projects */}
       <section className="py-12 sm:py-20 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Featured Projects</h2>
+          <ScrollAnimation>
+            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Featured Projects</h2>
+          </ScrollAnimation>
           <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
             {[
               {
@@ -236,58 +254,63 @@ export default async function Home() {
                 isGitHub: true
               }
             ].map((project, index) => (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
-              >
-                <div className="h-36 sm:h-48 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                  <span className="text-3xl sm:text-4xl transform transition-transform duration-300 hover:scale-125">
-                    {project.isGitHub ? '📚' : '🚀'}
-                  </span>
-                </div>
-                <div className="p-4 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 sm:px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs sm:text-sm hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors duration-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+              <ScrollAnimation key={index} delay={index * 300}>
+                <div
+                  className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
+                >
+                  <div className="h-36 sm:h-48 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                    <span className="text-3xl sm:text-4xl transform transition-transform duration-300 hover:scale-125">
+                      {project.isGitHub ? '📚' : '🚀'}
+                    </span>
+                  </div>
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2">{project.title}</h3>
+                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-2 sm:px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-xs sm:text-sm hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors duration-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ScrollAnimation>
             ))}
           </div>
-          <div className="text-center mt-6 sm:mt-8">
-            <Link
-              href="/projects"
-              className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
-            >
-              View All Projects
-            </Link>
-          </div>
+          <ScrollAnimation delay={600}>
+            <div className="text-center mt-6 sm:mt-8">
+              <Link
+                href="/projects"
+                className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
+              >
+                View All Projects
+              </Link>
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Call to Action */}
       <section className="py-12 sm:py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Let's Connect!</h2>
-          <p className="text-base sm:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto">
-            Interested in collaborating or want to learn more about my work?
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
-          >
-            Get in Touch
-          </Link>
+          <ScrollAnimation>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Let's Connect!</h2>
+            <p className="text-base sm:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto">
+              Interested in collaborating or want to learn more about my work?
+            </p>
+            <Link
+              href="/contact"
+              className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+            >
+              Get in Touch
+            </Link>
+          </ScrollAnimation>
         </div>
       </section>
     </div>
