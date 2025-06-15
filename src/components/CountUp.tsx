@@ -14,15 +14,17 @@ const CountUp = ({ end, duration = 2000, suffix = '' }: CountUpProps) => {
   const timeRef = useRef<number>(0);
   const rafRef = useRef<number>(0);
   
-  // Handle string values like "300+"
+  // Handle both string and number end values
   const numericEnd = typeof end === 'string' 
     ? parseInt(end.replace(/[^0-9]/g, '')) 
-    : end;
+    : Math.round(Number(end)); // Ensure clean conversion to number
   
+  // Extract any non-numeric suffix from string value or use provided suffix
   const stringSuffix = typeof end === 'string' 
     ? end.replace(/[0-9]/g, '') 
     : suffix;
   
+  // Start animation when component mounts or end value changes
   useEffect(() => {
     const startTime = performance.now();
     countRef.current = 0;
@@ -32,6 +34,7 @@ const CountUp = ({ end, duration = 2000, suffix = '' }: CountUpProps) => {
       const progress = Math.min(elapsedTime / duration, 1);
       const easeProgress = easeOutQuad(progress);
       
+      // Calculate current count value
       countRef.current = Math.floor(easeProgress * numericEnd);
       
       if (countRef.current !== timeRef.current) {

@@ -1,216 +1,224 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-
-// Use dynamic import with no SSR for client components
-const ScrollAnimation = dynamic(() => import('@/components/ScrollAnimation'), { ssr: false });
+import { getFeaturedRepos, GitHubRepo } from '@/lib/github';
 
 export const metadata: Metadata = {
-  title: 'Projects - Ishaan Dhiman',
-  description: 'Explore my portfolio of projects in web development, AI, and more.',
+  title: 'Projects | Ishaan Dhiman',
+  description: 'Explore my portfolio of projects in web development, app development, and more.',
 };
 
-export default function ProjectsPage() {
-  const projects = [
-    {
-      title: "Face Swap Application",
-      description: "An advanced face swapping tool that can replace faces in videos using just a single reference image. Built with Python and deep learning, this project requires no dataset or training.",
-      technologies: ["Python", "Computer Vision", "Deep Learning"],
-      features: [
-        "Single image face replacement",
-        "Video processing support",
-        "No training required",
-        "Multiple face detection"
-      ],
-      github: "https://github.com/IshaanD-RX6600/Face-Swap",
-      type: "AI & Computer Vision"
-    },
-    {
-      title: "Chess Game Engine",
-      description: "A TypeScript-based chess library for move generation, validation, and game state management. Features support for FEN notation and PGN format.",
-      technologies: ["TypeScript", "Chess.js", "Game Development"],
-      features: [
-        "Move validation",
-        "Game state management",
-        "FEN/PGN support",
-        "Headless architecture"
-      ],
-      github: "https://github.com/IshaanD-RX6600/Playing-around-with-chess",
-      type: "Game Development"
-    },
-    {
-      title: "Handwritten Text Recognition",
-      description: "Convert handwritten text into digital format using advanced OCR and machine learning techniques.",
-      technologies: ["Python", "OCR", "Machine Learning"],
-      features: [
-        "Handwriting recognition",
-        "Text extraction",
-        "Digital conversion",
-        "Image processing"
-      ],
-      github: "https://github.com/IshaanD-RX6600/Handwritten-to-text",
-      type: "AI & Machine Learning"
-    },
-    {
-      title: "Student Help Website",
-      description: "A platform designed to assist students with resources and tools for academic success.",
-      technologies: ["Web Development", "Educational Tech"],
-      features: [
-        "Resource management",
-        "Student tools",
-        "Academic support",
-        "User-friendly interface"
-      ],
-      github: "https://github.com/IshaanD-RX6600/Student-Help-Website",
-      type: "Web Development"
-    },
-    {
-      title: "Move Master",
-      description: "A comprehensive sports training platform that helps users learn and master various sports techniques. Features interactive tutorials and progress tracking.",
-      technologies: ["HTML", "CSS", "JavaScript", "Web Development"],
-      features: [
-        "Interactive sports tutorials",
-        "User authentication",
-        "Progress tracking",
-        "Responsive design"
-      ],
-      github: "https://github.com/IshaanD-RX6600/Move-Master",
-      demo: "https://www.youtube.com/watch?v=S022Pv9t8z4",
-      type: "Web Development"
-    },
-    {
-      title: "DSA Help",
-      description: "A comprehensive collection of Data Structures and Algorithms implementations in multiple programming languages (C++, Java, Python, JavaScript) to help students learn and practice DSA concepts.",
-      technologies: ["C++", "Java", "Python", "JavaScript", "DSA"],
-      features: [
-        "Multiple language implementations",
-        "Common DSA concepts",
-        "Educational resources",
-        "Practice problems"
-      ],
-      github: "https://github.com/IshaanD-RX6600/DSA-Help",
-      type: "Educational"
-    },
-    {
-      title: "Practice Problem Solving",
-      description: "A collection of coding problems and solutions focused on competitive programming preparation, including solutions for various coding platforms and contests.",
-      technologies: ["C++", "Competitive Programming", "Algorithms"],
-      features: [
-        "LeetCode solutions",
-        "Contest preparations",
-        "Algorithm implementations",
-        "Problem-solving strategies"
-      ],
-      github: "https://github.com/IshaanD-RX6600/Practice-Problem-Solving",
-      type: "Competitive Programming"
-    },
-    {
-      title: "Move Master Backend",
-      description: "The backend infrastructure for the Move Master platform, providing API endpoints and database management for the sports training application.",
-      technologies: ["Node.js", "Express", "Database", "REST API"],
-      features: [
-        "RESTful API endpoints",
-        "User data management",
-        "Authentication system",
-        "Progress tracking API"
-      ],
-      github: "https://github.com/IshaanD-RX6600/backend-for-move-master",
-      type: "Backend Development"
-    }
-  ];
+// Helper to get language color
+function getLanguageColor(language: string): string {
+  const colorMap: Record<string, string> = {
+    JavaScript: '#f1e05a',
+    TypeScript: '#2b7489',
+    HTML: '#e34c26',
+    CSS: '#563d7c',
+    Python: '#3572A5',
+    Java: '#b07219',
+    C: '#555555',
+    'C++': '#f34b7d',
+    'C#': '#178600',
+    PHP: '#4F5D95',
+    Ruby: '#701516',
+    Go: '#00ADD8',
+    Swift: '#ffac45',
+    Kotlin: '#F18E33',
+    Rust: '#dea584',
+    Dart: '#00B4AB',
+    // Add more languages as needed
+  };
+  
+  return colorMap[language] || '#858585';
+}
 
-  return (
-    <div className="min-h-screen py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <ScrollAnimation>
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
-              My Projects
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Exploring the intersection of AI, web development, and software engineering through hands-on projects.
+export default async function ProjectsPage() {
+  try {
+    // Fetch featured repositories
+    const repositories = await getFeaturedRepos('IshaanD-RX6600', 10);
+    const apiLimitExceeded = repositories.length > 0 && repositories[0].id === 1 && repositories[0].name === "Project 1";
+    
+    return (
+      <main className="py-16 px-4 max-w-7xl mx-auto">
+        {/* Enhanced Header Section */}
+        <div className="mb-16 text-center">
+          <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent inline-block">
+            Featured Projects
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Here are some of my featured projects. These reflect my interests, skills, 
+            and the technologies I've been working with.
+          </p>
+        </div>
+        
+        {apiLimitExceeded && (
+          <div className="mb-8 p-4 border border-yellow-400 bg-yellow-50 dark:bg-yellow-900/30 dark:border-yellow-700 rounded-lg text-center">
+            <p className="text-yellow-800 dark:text-yellow-200">
+              <span className="font-bold">Note:</span> GitHub API rate limit exceeded. Showing placeholder projects.
+              You can still visit my <a href="https://github.com/IshaanD-RX6600" target="_blank" className="underline">GitHub profile</a> directly.
             </p>
           </div>
-        </ScrollAnimation>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <ScrollAnimation key={index} delay={index * 150}>
-              <div
-                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]"
-              >
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-semibold">{project.title}</h3>
-                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">
-                      {project.type}
-                    </span>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    {project.description}
-                  </p>
-                  <div className="mb-4">
-                    <h4 className="font-medium mb-2">Key Features:</h4>
-                    <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-1">
-                      {project.features.map((feature, featureIndex) => (
-                        <li key={featureIndex}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-4">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
-                    >
-                      <svg
-                        className="w-5 h-5 mr-2"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      View on GitHub
-                    </a>
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
-                      >
-                        <svg
-                          className="w-5 h-5 mr-2"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
-                        </svg>
-                        Watch Demo
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </ScrollAnimation>
+        )}
+        
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {repositories.map((repo) => (
+            <ProjectCard key={repo.id} repo={repo} />
           ))}
+        </div>
+        
+        {/* Enhanced Call To Action */}
+        <div className="mt-20 text-center bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 py-12 px-4 rounded-2xl shadow-md">
+          <h3 className="text-2xl font-bold mb-4">Want to see more?</h3>
+          <p className="mb-6 max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+            Check out my GitHub profile for more projects and code samples.
+          </p>
+          <Link 
+            href="https://github.com/IshaanD-RX6600"
+            target="_blank"
+            className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 mx-auto w-fit"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.5-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.1-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.6.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.9 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 0z" />
+            </svg>
+            View All Projects on GitHub
+          </Link>
+        </div>
+      </main>
+    );
+  } catch (error) {
+    console.error("Error rendering projects page:", error);
+    
+    // Fallback content if there's an error
+    return (
+      <main className="py-16 px-4 max-w-7xl mx-auto">
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            My Projects
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Here are some of my featured projects. These reflect my interests, skills, 
+            and the technologies I've been working with.
+          </p>
+        </div>
+        
+        <div className="mb-8 p-4 border border-red-400 bg-red-50 dark:bg-red-900/30 dark:border-red-700 rounded-lg text-center">
+          <p className="text-red-800 dark:text-red-200">
+            <span className="font-bold">Oops!</span> We're having trouble connecting to GitHub right now.
+            You can visit my <a href="https://github.com/IshaanD-RX6600" target="_blank" className="underline">GitHub profile</a> directly to see my projects.
+          </p>
+        </div>
+        
+        <div className="mt-16 text-center">
+          <Link 
+            href="https://github.com/IshaanD-RX6600"
+            target="_blank"
+            className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            View All Projects on GitHub
+          </Link>
+        </div>
+      </main>
+    );
+  }
+}
+
+function ProjectCard({ repo }: { repo: GitHubRepo }) {
+  // Choose an appropriate icon based on the repository language
+  const getLanguageIcon = (language: string) => {
+    switch(language?.toLowerCase()) {
+      case 'typescript':
+        return '🔷';
+      case 'javascript':
+        return '🟨';
+      case 'python':
+        return '🐍';
+      case 'java':
+        return '☕';
+      case 'html':
+        return '🌐';
+      case 'css':
+        return '🎨';
+      default:
+        return '💻';
+    }
+  };
+
+  return (
+    <div className="border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-800 transform hover:scale-[1.02] hover:border-blue-300 dark:hover:border-blue-500">
+      {/* Colorful Header with Icon */}
+      <div 
+        className="h-24 flex items-center justify-center text-white p-4"
+        style={{ 
+          background: `linear-gradient(135deg, ${getLanguageColor(repo.language || 'default')}80, ${getLanguageColor(repo.language || 'default')}40)`,
+        }}
+      >
+        <span className="text-4xl transition-transform duration-300 hover:scale-125">{getLanguageIcon(repo.language)}</span>
+      </div>
+
+      <div className="p-6">
+        <h3 className="text-xl font-bold mb-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+          <Link href={repo.html_url} target="_blank" className="flex items-center">
+            {repo.name}
+            <svg className="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </Link>
+        </h3>
+        
+        <p className="text-gray-600 dark:text-gray-300 mb-5 min-h-[3rem] text-sm md:text-base line-clamp-3">
+          {repo.description || "No description provided"}
+        </p>
+        
+        {/* Repository Topics */}
+        {repo.topics && repo.topics.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-5">
+            {repo.topics.slice(0, 4).map((topic, index) => (
+              <span 
+                key={index}
+                className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 whitespace-nowrap"
+              >
+                #{topic}
+              </span>
+            ))}
+          </div>
+        )}
+        
+        <div className="flex items-center flex-wrap gap-3 mb-5 pt-3 border-t border-gray-100 dark:border-gray-700">
+          {repo.language && (
+            <div className="flex items-center">
+              <span 
+                className="w-3 h-3 rounded-full mr-1.5"
+                style={{ backgroundColor: getLanguageColor(repo.language) }}
+              />
+              <span className="text-sm text-gray-600 dark:text-gray-400">{repo.language}</span>
+            </div>
+          )}
+          
+          <div className="flex items-center text-gray-600 dark:text-gray-400">
+            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 0 0-8 8 8 8 0 0 0 5.73 7.66c.4.08.55-.17.55-.39 0-.19-.01-.82-.01-1.49-2.34.48-2.84-.56-3.02-1.08-.1-.26-.51-1.06-.87-1.28-.3-.16-.73-.55-.01-.56.67-.01 1.15.62 1.32.87.77 1.17 2.01.84 2.5.64.08-.54.3-.9.55-1.1-1.92-.22-3.94-.96-3.94-4.28 0-.95.34-1.72.9-2.33-.09-.22-.39-1.12.09-2.32 0 0 .73-.24 2.4.9a8.4 8.4 0 0 1 4.4 0c1.67-1.14 2.4-.9 2.4-.9.48 1.2.18 2.1.09 2.32.56.61.9 1.38.9 2.33 0 3.32-2.03 4.06-3.95 4.28.31.26.58.78.58 1.56 0 1.13-.01 2.04-.01 2.31 0 .22.15.48.55.39A8 8 0 0 0 16 8a8 8 0 0 0-8-8z"/>
+            </svg>
+            <span className="text-sm">{repo.stargazers_count} stars</span>
+          </div>
+          
+          <div className="flex items-center text-gray-600 dark:text-gray-400">
+            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M5 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1h1v1h1v9.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 14.5V5h1V4h1V3zm4 0v1H7V3h2z"/>
+            </svg>
+            <span className="text-sm">{repo.forks_count} forks</span>
+          </div>
+        </div>
+        
+        <div className="mt-4">
+          <Link 
+            href={repo.html_url}
+            target="_blank"
+            className="inline-block px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors duration-300"
+          >
+            View Project
+          </Link>
         </div>
       </div>
     </div>

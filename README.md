@@ -54,3 +54,62 @@ A modern portfolio website built with Next.js, TypeScript, and Tailwind CSS.
 - Tailwind CSS
 - Supabase
 - next-themes
+
+# GitHub Portfolio Generator
+
+This project includes scripts to generate a beautiful GitHub portfolio page and display it on your website.
+
+## Scripts Overview
+
+1. **github_repo_stats.ps1**: Lists all your repositories sorted by star count.
+2. **github_issue_checker.ps1**: Checks for open issues across all your repositories.
+3. **github_repo_analyzer.ps1**: Provides detailed analysis of a specific repository.
+4. **generate_github_portfolio.ps1**: Generates a beautiful HTML page showcasing your GitHub profile and repositories.
+
+## Requirements
+
+- GitHub CLI (`gh`) installed and authenticated
+- PowerShell
+- Node.js (for running the local server)
+
+## Installation
+
+1. Install GitHub CLI following the [official instructions](https://github.com/cli/cli#installation)
+2. Authenticate with GitHub CLI:
+   ```
+   gh auth login
+   ```
+3. Run any of the scripts above to get GitHub information
+
+## Viewing Your GitHub Portfolio
+
+After generating your GitHub portfolio HTML, you have two options:
+
+### Option 1: Run the Local Server
+
+Run the included Node.js server to preview your portfolio:
+
+```
+node server.js
+```
+
+Then visit [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Option 2: Include in Your Website
+
+Copy the content from `github_portfolio.html` and integrate it into your existing website.
+
+## Customization
+
+You can modify `generate_github_portfolio.ps1` to change the style and content of your GitHub portfolio page.
+
+## Automatically Updating Your Portfolio
+
+Run the portfolio generator periodically to keep your GitHub stats up to date:
+
+1. Use Windows Task Scheduler to run the script daily/weekly
+2. Or, include it in your website build process
+
+## License
+
+MIT

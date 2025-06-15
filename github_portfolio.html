@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Portfolio - Ishaan Dhiman</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .stat-box {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            flex: 1;
+            min-width: 120px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-box h3 {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .stat-box p {
+            margin: 10px 0 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .repos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .repo-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .repo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .repo-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .repo-card p {
+            color: #586069;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+        .repo-stats {
+            display: flex;
+            gap: 15px;
+        }
+        .repo-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: #586069;
+        }
+        .language-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #0366d6;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #0255b3;
+        }
+        .updated {
+            font-size: 12px;
+            color: #586069;
+            margin-top: 20px;
+            text-align: center;
+        }
+        /* Language colors */
+        .JavaScript { background-color: #f1e05a; }
+        .TypeScript { background-color: #2b7489; }
+        .HTML { background-color: #e34c26; }
+        .CSS { background-color: #563d7c; }
+        .Python { background-color: #3572A5; }
+        .Java { background-color: #b07219; }
+        .C { background-color: #555555; }
+        .CPP { background-color: #f34b7d; }
+    </style>
+</head>
+<body>
+    <!-- Profile -->
+    <div class="profile">
+        <img class="profile-img" src="https://avatars.githubusercontent.com/u/181742585?v=4" alt="Ishaan Dhiman">
+        <div>
+            <h1>Ishaan Dhiman</h1>
+            <p>My old account got deleted off of github.
+</p>
+            <p>
+                <a href="https://github.com/IshaanD-RX6600" target="_blank">@IshaanD-RX6600 on GitHub</a>            </p>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-box">
+            <h3>Repositories</h3>
+            <p>16</p>
+        </div>
+        <div class="stat-box">
+            <h3>Followers</h3>
+            <p>4</p>
+        </div>
+        <div class="stat-box">
+            <h3>Following</h3>
+            <p>5</p>
+        </div>
+    </div>
+
+    <h2>My Projects</h2>
+    <div class="repos">        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Move-Master" target="_blank">Move-Master</a></h3>
+            <p>Me and Rohan Made it </p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span class="language-dot" style="background-color: #e34c26;"></span>
+                    HTML
+                </div>                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Move-Master" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Pac-Man-java" target="_blank">Pac-Man-java</a></h3>
+            <p>No description available</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span class="language-dot" style="background-color: #b07219;"></span>
+                    Java
+                </div>                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Pac-Man-java" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/IshaanDhiman" target="_blank">IshaanDhiman</a></h3>
+            <p>A website made to showcase my skills.</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span class="language-dot" style="background-color: #2b7489;"></span>
+                    TypeScript
+                </div>                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/IshaanDhiman" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Learning-Machine-Learning" target="_blank">Learning-Machine-Learning</a></h3>
+            <p>Just something I did for Coding club with Tensorflow(way too many errors)</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span class="language-dot" style="background-color: #dddddd;"></span>
+                    Jupyter Notebook
+                </div>                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Learning-Machine-Learning" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Serenity-Valley-game" target="_blank">Serenity-Valley-game</a></h3>
+            <p>Game I made using pygame</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Serenity-Valley-game" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Student-Help-Website" target="_blank">Student-Help-Website</a></h3>
+            <p>Made by, Anthony Bochenek, Dhairya Shah, Ishaan Dhiman, Rohan Tewari, and Atharv Gokule</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Student-Help-Website" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Playing-around-with-chess" target="_blank">Playing-around-with-chess</a></h3>
+            <p>chess.js is a lightweight, headless TypeScript library for chess move generation, validation, and game state management. It supports FEN, PGN, and both strict and permissive move parsing, making it ideal for building chess applications without a UI.</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span class="language-dot" style="background-color: #2b7489;"></span>
+                    TypeScript
+                </div>                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Playing-around-with-chess" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Practice-Problem-Solving" target="_blank">Practice-Problem-Solving</a></h3>
+            <p>Problems with c++ in preperation for coding contests and suffering from leetcode</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span class="language-dot" style="background-color: #f34b7d;"></span>
+                    C++
+                </div>                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Practice-Problem-Solving" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Canadian-Computing-Contest-Prep" target="_blank">Canadian-Computing-Contest-Prep</a></h3>
+            <p>Learning Java from scratch</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span class="language-dot" style="background-color: #b07219;"></span>
+                    Java
+                </div>                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Canadian-Computing-Contest-Prep" target="_blank" class="btn">View Project</a>
+        </div>        <div class="repo-card">
+            <h3><a href="https://github.com/IshaanD-RX6600/Coding-Club-Website" target="_blank">Coding-Club-Website</a></h3>
+            <p>No description available</p>
+            <div class="repo-stats">                <div class="repo-stat">
+                    <span class="language-dot" style="background-color: #2b7489;"></span>
+                    TypeScript
+                </div>                <div class="repo-stat">
+                    <span>â­</span> 0
+                </div>
+                <div class="repo-stat">
+                    <span>ðŸ´</span> 0
+                </div>
+            </div>
+            <a href="https://github.com/IshaanD-RX6600/Coding-Club-Website" target="_blank" class="btn">View Project</a>
+        </div>    </div>
+    
+    <p class="updated">Last updated: March 27, 2025</p>
+</body>
+</html>

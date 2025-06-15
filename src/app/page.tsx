@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
+import { getGitHubStats } from '@/lib/github';
 
 // Use dynamic import with no SSR for client components
 const CountUp = dynamic(() => import('@/components/CountUp'), { ssr: false });
@@ -12,67 +13,32 @@ export const metadata: Metadata = {
   description: 'Welcome to my portfolio. I am a passionate student developer focusing on web development and AI.',
 };
 
-async function getGitHubStats() {
+export default async function Home() {
+  // Hardcode the commit count to match actual GitHub stats
+  const commitCount = 300;
+  
+  // Fetch stats but be prepared for failures
+  let stats;
   try {
-    const username = 'IshaanD-RX6600';
+    stats = await getGitHubStats('IshaanD-RX6600');
     
-    // Fetch user data
-    const userResponse = await fetch(`https://api.github.com/users/${username}`, {
-      cache: 'no-store',
-      headers: {
-        'Accept': 'application/vnd.github.v3+json'
-      }
+    // Debug output for commit count
+    console.log('GitHub Stats (debug):', {
+      projects: stats.projects,
+      totalCommits: stats.totalCommits,
+      technologies: stats.technologies,
+      hackathons: stats.hackathons
     });
-    const userData = await userResponse.json();
-    
-    if (!userData || userData.message === "Not Found") {
-      throw new Error('GitHub user not found');
-    }
-    
-    // Fetch repositories
-    const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`, {
-      cache: 'no-store',
-      headers: {
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-    const reposData = await reposResponse.json();
-    
-    if (!Array.isArray(reposData)) {
-      throw new Error('Unable to fetch repositories');
-    }
-    
-    // Count languages
-    const languages = new Set();
-    reposData.forEach(repo => {
-      if (repo.language) {
-        languages.add(repo.language);
-      }
-    });
-    
-    // For commit count, we'll use the contribution count from the contributions calendar
-    // Using a constant here since GitHub API doesn't easily provide total commit count
-    // Alternatively, set a real-time scraper or use a GitHub Actions workflow to update this value
-    
-    return {
-      projects: reposData.length,
-      totalCommits: userData.public_repos > 0 ? "300+" : "0", // Show "300+" instead of exact count
-      technologies: languages.size,
-      hackathons: 3
-    };
   } catch (error) {
     console.error('Error fetching GitHub stats:', error);
-    return {
-      projects: 8,
-      totalCommits: "300+", // Show "300+" in fallback case too
-      technologies: 12,
+    // Fallback values matching your actual GitHub stats
+    stats = {
+      projects: 16,
+      totalCommits: commitCount,
+      technologies: 7,
       hackathons: 3
     };
   }
-}
-
-export default async function Home() {
-  const stats = await getGitHubStats();
   
   return (
     <div className="min-h-screen">
@@ -133,58 +99,55 @@ export default async function Home() {
             <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
           </svg>
         </div>
-      </section>
-
-      {/* Statistics Section */}
-      <section className="py-12 bg-gray-900 dark:bg-gray-900">
+      </section>      {/* Statistics Section */}
+      <section className="py-12 bg-gray-100 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="flex flex-col items-center">
-              <div className="text-blue-500 mb-2">
+              <div className="text-blue-500 dark:text-blue-400 mb-2">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
                 </svg>
               </div>
-              <div className="text-4xl font-bold text-white mb-1">
+              <div className="text-4xl font-bold text-gray-900 dark:text-white mb-1">
                 <CountUp end={stats.projects} suffix="+" />
               </div>
-              <div className="text-gray-400 text-sm text-center">Projects Completed</div>
+              <div className="text-gray-600 dark:text-gray-400 text-sm text-center">Projects Completed</div>
             </div>
             
             <div className="flex flex-col items-center">
-              <div className="text-blue-500 mb-2">
+              <div className="text-blue-500 dark:text-blue-400 mb-2">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
                 </svg>
               </div>
-              <div className="text-4xl font-bold text-white mb-1">
+              <div className="text-4xl font-bold text-gray-900 dark:text-white mb-1">
                 <CountUp end={stats.hackathons} suffix="+" />
               </div>
-              <div className="text-gray-400 text-sm text-center">Hackathons</div>
+              <div className="text-gray-600 dark:text-gray-400 text-sm text-center">Hackathons</div>
             </div>
             
             <div className="flex flex-col items-center">
-              <div className="text-blue-500 mb-2">
+              <div className="text-blue-500 dark:text-blue-400 mb-2">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
                 </svg>
               </div>
-              <div className="text-4xl font-bold text-white mb-1">
-                <CountUp end={stats.totalCommits} />
+              <div className="text-4xl font-bold text-gray-900 dark:text-white mb-1">
+                <CountUp end={commitCount} suffix="+" />
               </div>
-              <div className="text-gray-400 text-sm text-center">Total Commits</div>
+              <div className="text-gray-600 dark:text-gray-400 text-sm text-center">All-Time Commits</div>
             </div>
             
             <div className="flex flex-col items-center">
-              <div className="text-blue-500 mb-2">
+              <div className="text-blue-500 dark:text-blue-400 mb-2">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9h8v2h-8zm0-3h8v2h-8zm0 6h4v2h-4z"/>
                 </svg>
-              </div>
-              <div className="text-4xl font-bold text-white mb-1">
+              </div>              <div className="text-4xl font-bold text-gray-900 dark:text-white mb-1">
                 <CountUp end={stats.technologies} suffix="+" />
               </div>
-              <div className="text-gray-400 text-sm text-center">Technologies</div>
+              <div className="text-gray-600 dark:text-gray-400 text-sm text-center">Technologies</div>
             </div>
           </div>
         </div>
